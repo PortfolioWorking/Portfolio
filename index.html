@@ -1,1 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>My Portfolio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+
+            padding: 20px;
+
+            background: #181818;
+            border-bottom: 1px solid #333;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff75c3;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 60vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            padding: 60px 20px;
+
+            background: linear-gradient(135deg, #171717, #242424);
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #ccc;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        /* SECTIONS */
+        .portfolio-section {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .portfolio-section h2 {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 40px;
+        }
+
+        /* GALLERY */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            background: #1c1c1c;
+            padding: 10px;
+            border-radius: 15px;
+            overflow: hidden;
+
+            border: 1px solid #333;
+
+            transition: transform 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+        /* ABOUT */
+        .about {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+
+            color: #ccc;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* CONTACT */
+        .contact {
+            text-align: center;
+            padding: 80px 20px;
+            background: #181818;
+        }
+
+        .contact h2 {
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            color: #bbb;
+            margin-bottom: 25px;
+        }
+
+        .contact a {
+            display: inline-block;
+
+            padding: 14px 30px;
+
+            background: #ff75c3;
+            color: white;
+
+            text-decoration: none;
+            border-radius: 30px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .contact a:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #101010;
+            color: #777;
+        }
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+
+            nav {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .portfolio-section h2 {
+                font-size: 30px;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#logos">Logos</a>
+        <a href="#banners">Banners</a>
+        <a href="#png-models">PNG Models</a>
+        <a href="#emotes">Emotes</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+
+    <!-- HOME -->
+
+    <section class="hero" id="home">
+
+        <h1>My Portfolio</h1>
+
+        <p>
+            Graphic Designer & Artist creating logos, banners,
+            PNG models, emotes and creative artwork for VTubers
+            and content creators.
+        </p>
+
+    </section>
+
+
+    <!-- LOGOS -->
+
+    <section class="portfolio-section" id="logos">
+
+        <h2>Logos</h2>
+
+        <p class="section-description">
+            Custom logos designed for creators and brands.
+        </p>
+
+        <div class="gallery">
+
+            <div class="gallery-item">
+                <img src="images/logos/logo%201.jpeg" alt="Logo 1">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/logos/logo%202.jpeg" alt="Logo 2">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/logos/logo%203.jpeg" alt="Logo 3">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/logos/logo%204.jpeg" alt="Logo 4">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/logos/logo%205.jpeg" alt="Logo 5">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BANNERS -->
+
+    <section class="portfolio-section" id="banners">
+
+        <h2>Banners</h2>
+
+        <p class="section-description">
+            Custom banners and channel artwork.
+        </p>
+
+        <div class="gallery">
+
+            <div class="gallery-item">
+                <img src="images/banners/Banner1.jpeg" alt="Banner 1">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/banners/Banner2.jpeg" alt="Banner 2">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/banners/Banner3.jpeg" alt="Banner 3">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/banners/Banner4.jpeg" alt="Banner 4">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/banners/Banner5.jpeg" alt="Banner 5">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/banners/Banner6.jpeg" alt="Banner 6">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/banners/Banner7.jpeg" alt="Banner 7">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PNG MODELS -->
+
+    <section class="portfolio-section" id="png-models">
+
+        <h2>PNG Models</h2>
+
+        <p class="section-description">
+            Custom PNG models and character artwork.
+        </p>
+
+        <div class="gallery">
+
+            <div class="gallery-item">
+                <img src="images/png-models/Png%20model%201.jpeg" alt="PNG Model 1">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/png-models/Png%20model%202.jpeg" alt="PNG Model 2">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/png-models/Png%20model%203.jpeg" alt="PNG Model 3">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/png-models/Png%20model%204.jpeg" alt="PNG Model 4">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/png-models/Png%20model%205.jpeg" alt="PNG Model 5">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/png-models/Png%20model%206.jpeg" alt="PNG Model 6">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/png-models/Png%20model%207.jpeg" alt="PNG Model 7">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/png-models/Png%20model%208.jpeg" alt="PNG Model 8">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/png-models/Png%20model%209.jpeg" alt="PNG Model 9">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- EMOTES -->
+
+    <section class="portfolio-section" id="emotes">
+
+        <h2>Emotes</h2>
+
+        <p class="section-description">
+            Custom emotes for streamers and content creators.
+        </p>
+
+        <div class="gallery">
+
+            <div class="gallery-item">
+                <img src="images/emotes/Emotes%201.jpeg" alt="Emotes 1">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/emotes/Emotes%202.jpeg" alt="Emotes 2">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/emotes/Emotes%203.jpeg" alt="Emotes 3">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/emotes/Emotes%204.jpeg" alt="Emotes 4">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section class="portfolio-section" id="about">
+
+        <h2>About Me</h2>
+
+        <div class="about">
+
+            <p>
+                I'm a graphic designer and artist specializing in
+                creative artwork for VTubers, streamers and content
+                creators.
+            </p>
+
+            <br>
+
+            <p>
+                I create custom logos, banners, PNG models, emotes
+                and other stream graphics tailored to each creator's
+                style and vision.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section class="contact" id="contact">
+
+        <h2>Let's Work Together</h2>
+
+        <p>
+            Interested in working with me? Feel free to contact me.
+        </p>
+
+        <a href="mailto:your@email.com">
+            Contact Me
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 My Portfolio. All Rights Reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>
