@@ -8,9 +8,9 @@
 
 <style>
 
-/* =========================================================
+/* =====================================================
    RESET
-========================================================= */
+===================================================== */
 
 *{
     margin:0;
@@ -24,268 +24,235 @@ html{
 
 body{
     min-height:100vh;
-    background:#050508;
-    color:#fff;
-    font-family:Arial, Helvetica, sans-serif;
     overflow-x:hidden;
+
+    background:#05060b;
+    color:#fff;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     user-select:none;
     -webkit-user-select:none;
     -webkit-touch-callout:none;
 }
 
-/* =========================================================
-   BACKGROUND
-========================================================= */
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-5;
+/* =====================================================
+   PREMIUM BACKGROUND
+===================================================== */
 
+body{
     background:
         radial-gradient(
             circle at 15% 20%,
-            rgba(100,70,255,.18),
+            rgba(77,54,190,.20),
             transparent 30%
         ),
         radial-gradient(
             circle at 85% 25%,
-            rgba(0,220,255,.13),
+            rgba(0,130,160,.13),
             transparent 30%
         ),
         radial-gradient(
-            circle at 50% 90%,
-            rgba(255,0,160,.10),
+            circle at 50% 85%,
+            rgba(130,25,110,.12),
             transparent 35%
-        );
+        ),
+        #05060b;
 }
 
-/* moving aurora */
 
-.aurora{
+/* subtle moving light */
+
+.background-light{
     position:fixed;
-    inset:-20%;
-    z-index:-4;
+    inset:-30%;
+
+    z-index:-3;
+
     pointer-events:none;
 
     background:
         radial-gradient(
-            ellipse at 30% 30%,
-            rgba(110,80,255,.13),
-            transparent 40%
+            ellipse at 30% 35%,
+            rgba(88,64,210,.10),
+            transparent 35%
         ),
         radial-gradient(
-            ellipse at 70% 60%,
-            rgba(0,210,255,.09),
-            transparent 40%
-        ),
-        radial-gradient(
-            ellipse at 50% 90%,
-            rgba(255,0,170,.08),
+            ellipse at 75% 60%,
+            rgba(0,180,210,.07),
             transparent 35%
         );
 
-    filter:blur(60px);
-
     animation:
-        auroraMove 14s ease-in-out infinite alternate;
+        backgroundMove 18s ease-in-out infinite alternate;
 }
 
-@keyframes auroraMove{
+@keyframes backgroundMove{
 
-    0%{
+    from{
         transform:
-            translate(-3%, -2%)
+            translate3d(-2%,0,0)
             scale(1);
     }
 
-    50%{
+    to{
         transform:
-            translate(3%, 2%)
-            scale(1.08);
-    }
-
-    100%{
-        transform:
-            translate(-2%, 4%)
-            scale(1.03);
+            translate3d(2%,2%,0)
+            scale(1.04);
     }
 }
 
-/* =========================================================
-   PARTICLES
-========================================================= */
+
+/* =====================================================
+   LIGHTWEIGHT PARTICLES
+===================================================== */
 
 .particles{
     position:fixed;
     inset:0;
+
     pointer-events:none;
-    z-index:-2;
+
+    z-index:-1;
+
     overflow:hidden;
 }
 
 .particle{
     position:absolute;
+
     width:2px;
     height:2px;
-    border-radius:50%;
-    background:rgba(255,255,255,.75);
 
-    box-shadow:
-        0 0 8px rgba(255,255,255,.7);
+    border-radius:50%;
+
+    background:rgba(255,255,255,.5);
 
     animation:
-        particleFloat linear infinite;
+        floatParticle 12s linear infinite;
 }
 
-@keyframes particleFloat{
+@keyframes floatParticle{
 
-    from{
+    0%{
         transform:
-            translateY(110vh)
-            translateX(0);
+            translate3d(0,110vh,0);
+
         opacity:0;
     }
 
     15%{
-        opacity:.8;
+        opacity:.55;
     }
 
-    80%{
-        opacity:.45;
+    85%{
+        opacity:.35;
     }
 
-    to{
+    100%{
         transform:
-            translateY(-15vh)
-            translateX(40px);
+            translate3d(25px,-10vh,0);
+
         opacity:0;
     }
 }
 
-/* =========================================================
-   CURSOR GLOW
-========================================================= */
 
-.cursor-glow{
-    position:fixed;
-    width:260px;
-    height:260px;
+/* =====================================================
+   HOME
+===================================================== */
 
-    transform:
-        translate(-50%,-50%);
-
-    border-radius:50%;
-
-    pointer-events:none;
-    z-index:9990;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(120,100,255,.12),
-            rgba(80,180,255,.05) 35%,
-            transparent 70%
-        );
-
-    filter:blur(10px);
-}
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-main{
+#homePage{
     width:100%;
-    min-height:100vh;
-    position:relative;
 }
 
-/* =========================================================
+
+/* =====================================================
    HERO
-========================================================= */
+===================================================== */
 
 .hero{
-    min-height:88vh;
+
+    min-height:72vh;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
 
-    padding:80px 20px 50px;
+    padding:
+        55px 20px 35px;
 
     position:relative;
 }
 
-/* small top label */
+
+/* top label */
 
 .hero-label{
-    position:relative;
-    z-index:10;
 
-    font-size:11px;
-    letter-spacing:7px;
+    margin-bottom:22px;
+
+    color:
+        rgba(255,255,255,.52);
+
+    font-size:10px;
+
+    font-weight:600;
+
+    letter-spacing:6px;
+
     text-transform:uppercase;
 
-    color:rgba(255,255,255,.55);
-
-    margin-bottom:25px;
-
     animation:
-        fadeDown 1.2s ease both;
+        fadeIn .9s ease both;
 }
 
-@keyframes fadeDown{
 
-    from{
-        opacity:0;
-        transform:translateY(-20px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* =========================================================
-   PORTFOLIO TITLE
-========================================================= */
+/* =====================================================
+   TITLE
+===================================================== */
 
 .title-wrap{
 
-    --lens-x:50%;
-    --lens-y:30%;
-
     position:relative;
 
-    width:min(700px,90vw);
+    width:
+        min(700px,92vw);
 
-    height:390px;
+    height:300px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     overflow:visible;
-
-    isolation:isolate;
 }
 
-/* normal title */
+
+/* actual text */
 
 .title-normal{
 
     position:absolute;
+
     inset:0;
 
     display:flex;
+
     flex-direction:column;
 
     align-items:center;
+
     justify-content:center;
 
     z-index:2;
@@ -293,177 +260,171 @@ main{
     pointer-events:none;
 }
 
-/* IMPORTANT:
-   exact two words with small gap */
 
 .word{
 
     display:block;
 
     font-size:
-        clamp(72px, 15vw, 175px);
+        clamp(76px,12vw,155px);
 
-    line-height:.82;
+    line-height:.80;
 
     font-weight:900;
 
     letter-spacing:
-        clamp(4px,1vw,12px);
-
-    text-transform:uppercase;
+        clamp(3px,.7vw,9px);
 
     color:#fff;
-
-    text-align:center;
 
     white-space:nowrap;
 
-    text-shadow:
-        0 0 30px rgba(255,255,255,.08);
+    text-align:center;
 
-    animation:
-        titleFloat 5s ease-in-out infinite;
+    text-shadow:
+        0 0 25px rgba(255,255,255,.06);
 }
+
 
 .word:first-child{
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
 
-.word:nth-child(2){
-    animation-delay:-2.5s;
-}
 
-@keyframes titleFloat{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-4px);
-    }
-}
-
-/* =========================================================
+/* =====================================================
    REFRACTED TEXT
-========================================================= */
+===================================================== */
 
-.title-refract{
+/*
+   The refracted title sits inside the lens.
+   The lens itself moves using transform, so there
+   is no expensive per-frame JS calculation.
+*/
 
-    position:absolute;
-    inset:0;
-
-    display:flex;
-    flex-direction:column;
-
-    align-items:center;
-    justify-content:center;
-
-    z-index:4;
-
-    pointer-events:none;
-
-    clip-path:
-        circle(
-            var(--lens-radius,90px)
-            at
-            var(--lens-x)
-            var(--lens-y)
-        );
-
-    filter:
-        blur(.7px)
-        saturate(1.35);
-
-    transform:
-        scale(1.055);
-
-    mix-blend-mode:screen;
-}
-
-.title-refract .word{
-
-    color:#fff;
-
-    text-shadow:
-        -3px 0 rgba(255,0,80,.65),
-         3px 0 rgba(0,210,255,.65),
-         0 0 18px rgba(255,255,255,.25);
-}
-
-/* =========================================================
-   GLASS LENS
-========================================================= */
-
-.glass-lens{
+.lens{
 
     position:absolute;
 
-    width:
-        var(--lens-size,180px);
+    left:50%;
+    top:50%;
 
-    height:
-        var(--lens-size,180px);
-
-    left:
-        var(--lens-x);
-
-    top:
-        var(--lens-y);
+    width:150px;
+    height:150px;
 
     transform:
-        translate(-50%,-50%);
+        translate3d(-50%,-50%,0)
+        translateY(-70px);
+
+    z-index:5;
 
     border-radius:50%;
 
-    z-index:7;
+    overflow:hidden;
 
     pointer-events:none;
 
     background:
-        radial-gradient(
-            circle at 35% 25%,
-            rgba(255,255,255,.20),
-            rgba(255,255,255,.07) 28%,
-            rgba(100,180,255,.045) 52%,
-            rgba(255,255,255,.02) 70%,
-            transparent 75%
-        );
+        rgba(255,255,255,.045);
 
     border:
-        1px solid rgba(255,255,255,.55);
+        1px solid rgba(255,255,255,.48);
 
     box-shadow:
-        inset 0 0 25px rgba(255,255,255,.08),
-        inset 0 0 60px rgba(80,180,255,.08),
-        0 0 20px rgba(130,170,255,.12);
+        0 0 18px rgba(120,180,255,.12),
+        inset 0 0 22px rgba(255,255,255,.08);
 
-    backdrop-filter:
-        blur(2px);
+    will-change:transform;
 
-    -webkit-backdrop-filter:
-        blur(2px);
-
-    overflow:hidden;
-
-    transition:
-        width .3s ease,
-        height .3s ease;
+    animation:
+        lensMove 6s ease-in-out infinite;
 }
 
-/* glass reflection */
 
-.glass-lens::before{
+/*
+   PORT -> FOLIO -> PORT
+
+   The distance is deliberately small so the
+   lens remains over the typography.
+*/
+
+@keyframes lensMove{
+
+    0%,
+    100%{
+        transform:
+            translate3d(-50%,-50%,0)
+            translateY(-70px);
+    }
+
+    50%{
+        transform:
+            translate3d(-50%,-50%,0)
+            translateY(70px);
+    }
+}
+
+
+/* refracted duplicate */
+
+.lens-text{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:700px;
+    max-width:none;
+
+    height:300px;
+
+    transform:
+        translate3d(-50%,-50%,0);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    filter:
+        blur(.8px);
+
+    mix-blend-mode:screen;
+
+    pointer-events:none;
+}
+
+
+.lens-text .word{
+
+    color:#fff;
+
+    text-shadow:
+        -3px 0 rgba(255,40,100,.75),
+         3px 0 rgba(0,210,255,.75),
+         0 0 15px rgba(255,255,255,.25);
+
+    transform:
+        scale(1.07);
+}
+
+
+/* lens reflection */
+
+.lens::before{
 
     content:"";
 
     position:absolute;
 
-    width:55%;
+    width:65%;
     height:25%;
 
-    top:13%;
-    left:18%;
+    top:10%;
+    left:12%;
 
     border-radius:50%;
 
@@ -474,81 +435,71 @@ main{
             transparent
         );
 
+    transform:
+        rotate(-25deg);
+
     filter:blur(4px);
 
-    transform:rotate(-25deg);
-
-    opacity:.65;
+    opacity:.55;
 }
 
-/* RGB edge */
 
-.glass-lens::after{
+/* subtle RGB edge */
+
+.lens::after{
 
     content:"";
 
     position:absolute;
+
     inset:0;
 
     border-radius:50%;
 
-    background:
-        conic-gradient(
-            from 0deg,
-            rgba(255,0,90,.14),
-            rgba(0,220,255,.14),
-            rgba(150,80,255,.14),
-            rgba(255,0,90,.14)
-        );
+    border:
+        1px solid rgba(100,220,255,.22);
 
-    mix-blend-mode:screen;
-
-    opacity:.6;
-
-    animation:
-        lensRGB 5s linear infinite;
+    box-shadow:
+        inset 1px 0 rgba(255,70,120,.18),
+        inset -1px 0 rgba(0,220,255,.18);
 }
 
-@keyframes lensRGB{
 
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-/* =========================================================
+/* =====================================================
    SUBTITLE
-========================================================= */
+===================================================== */
 
 .hero-subtitle{
 
-    margin-top:10px;
+    margin-top:18px;
 
-    text-align:center;
-
-    color:rgba(255,255,255,.48);
+    color:
+        rgba(255,255,255,.45);
 
     font-size:
-        clamp(11px,1.5vw,14px);
+        clamp(9px,1.2vw,12px);
 
     letter-spacing:
-        clamp(3px,1vw,7px);
+        clamp(2px,.7vw,5px);
 
     text-transform:uppercase;
 
+    text-align:center;
+
     animation:
-        fadeUp 1.4s ease .3s both;
+        fadeIn 1s ease .2s both;
 }
 
-@keyframes fadeUp{
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+@keyframes fadeIn{
 
     from{
         opacity:0;
-        transform:translateY(20px);
+        transform:translateY(10px);
     }
 
     to{
@@ -557,40 +508,50 @@ main{
     }
 }
 
-/* =========================================================
-   CATEGORY AREA
-========================================================= */
+
+/* =====================================================
+   PORTFOLIO SECTION
+===================================================== */
 
 .portfolio-section{
 
-    width:min(1250px,92%);
+    width:
+        min(1200px,92%);
 
     margin:
         0 auto;
 
     padding:
-        20px 0 100px;
+        15px 0 80px;
 }
+
+
+/* heading */
 
 .section-heading{
 
     display:flex;
-    align-items:center;
-    justify-content:space-between;
 
-    margin-bottom:35px;
+    align-items:center;
+
+    margin-bottom:30px;
 }
+
 
 .section-heading h2{
 
-    font-size:12px;
+    flex-shrink:0;
+
+    font-size:11px;
 
     letter-spacing:5px;
 
-    color:rgba(255,255,255,.55);
+    color:
+        rgba(255,255,255,.55);
 
     text-transform:uppercase;
 }
+
 
 .section-line{
 
@@ -603,14 +564,15 @@ main{
     background:
         linear-gradient(
             90deg,
-            rgba(255,255,255,.18),
+            rgba(255,255,255,.16),
             transparent
         );
 }
 
-/* =========================================================
-   CATEGORY GRID
-========================================================= */
+
+/* =====================================================
+   FOLDER GRID
+===================================================== */
 
 .folder-grid{
 
@@ -619,178 +581,169 @@ main{
     grid-template-columns:
         repeat(3,1fr);
 
-    gap:35px;
+    gap:28px;
 
-    perspective:1400px;
+    perspective:1200px;
 }
 
-/* =========================================================
-   FOLDER CARD
-========================================================= */
+
+/* =====================================================
+   FOLDER
+===================================================== */
 
 .folder-card{
 
-    height:300px;
-
     position:relative;
+
+    height:275px;
 
     cursor:pointer;
 
-    perspective:1000px;
-
-    animation:
-        cardAppear .8s ease both;
+    perspective:900px;
 
     transform-style:preserve-3d;
 
-    transition:
-        transform .35s cubic-bezier(.2,.8,.2,1);
+    animation:
+        cardIn .7s ease both;
 }
 
+
 .folder-card:nth-child(2){
-    animation-delay:.08s;
+    animation-delay:.05s;
 }
 
 .folder-card:nth-child(3){
-    animation-delay:.16s;
+    animation-delay:.10s;
 }
 
 .folder-card:nth-child(4){
-    animation-delay:.24s;
+    animation-delay:.15s;
 }
 
 .folder-card:nth-child(5){
-    animation-delay:.32s;
+    animation-delay:.20s;
 }
 
 .folder-card:nth-child(6){
-    animation-delay:.40s;
+    animation-delay:.25s;
 }
 
-@keyframes cardAppear{
+
+@keyframes cardIn{
 
     from{
         opacity:0;
         transform:
-            translateY(40px)
-            rotateX(8deg);
+            translateY(25px);
     }
 
     to{
         opacity:1;
         transform:
-            translateY(0)
-            rotateX(0);
+            translateY(0);
     }
 }
 
-/* =========================================================
+
+/* =====================================================
    FOLDER BODY
-========================================================= */
+===================================================== */
 
 .folder-body{
 
     position:absolute;
 
     inset:
-        15px 0 0;
+        14px 0 0;
 
-    border-radius:
-        20px;
+    overflow:hidden;
+
+    border-radius:18px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.105),
+            rgba(255,255,255,.10),
             rgba(255,255,255,.035)
         );
 
     border:
-        1px solid rgba(255,255,255,.14);
+        1px solid rgba(255,255,255,.13);
 
     box-shadow:
-        0 25px 60px rgba(0,0,0,.38),
-        inset 0 1px 0 rgba(255,255,255,.08);
+        0 18px 45px rgba(0,0,0,.35),
+        inset 0 1px rgba(255,255,255,.08);
 
     transform:
-        translateZ(20px);
-
-    transform-style:preserve-3d;
-
-    overflow:hidden;
+        translateZ(15px);
 
     transition:
-        .45s cubic-bezier(.2,.8,.2,1);
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
 }
 
-/* =========================================================
+
+/* =====================================================
    FOLDER TAB
-========================================================= */
+===================================================== */
 
 .folder-tab{
 
     position:absolute;
 
-    top:-2px;
+    top:-1px;
     left:18px;
 
-    width:115px;
-    height:30px;
+    width:105px;
+    height:27px;
 
     border-radius:
-        12px 12px 0 0;
+        10px 10px 0 0;
 
     background:
         linear-gradient(
             135deg,
-            rgba(255,255,255,.16),
-            rgba(255,255,255,.055)
+            rgba(255,255,255,.15),
+            rgba(255,255,255,.05)
         );
 
     border:
-        1px solid rgba(255,255,255,.14);
+        1px solid rgba(255,255,255,.13);
 
     border-bottom:none;
 
-    transform:
-        translateZ(32px);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.1);
-
-    z-index:5;
+    z-index:3;
 }
 
-/* =========================================================
-   IMAGE PREVIEW
-========================================================= */
+
+/* =====================================================
+   FOLDER IMAGE
+===================================================== */
 
 .folder-preview{
 
     position:absolute;
 
-    top:42px;
-    left:18px;
-    right:18px;
-    bottom:62px;
-
-    border-radius:
-        13px;
+    top:35px;
+    left:15px;
+    right:15px;
+    bottom:57px;
 
     overflow:hidden;
 
+    border-radius:12px;
+
     background:
-        rgba(0,0,0,.08);
+        rgba(0,0,0,.06);
 
     border:
         1px solid rgba(255,255,255,.08);
 
     transform:
-        translateZ(38px);
-
-    transition:
-        transform .45s ease;
+        translateZ(25px);
 }
+
 
 .folder-preview img{
 
@@ -812,393 +765,88 @@ main{
     pointer-events:none;
 
     transition:
-        transform .6s cubic-bezier(.2,.8,.2,1);
+        transform .4s ease;
 }
 
-/* =========================================================
-   FOLDER BOTTOM
-========================================================= */
+
+.folder-card:hover
+.folder-preview img{
+
+    transform:
+        scale(1.035);
+}
+
+
+/* =====================================================
+   FOLDER NAME
+===================================================== */
 
 .folder-bottom{
 
     position:absolute;
 
-    left:20px;
-    right:20px;
-    bottom:19px;
+    left:18px;
+    right:18px;
+
+    bottom:15px;
 
     display:flex;
 
     align-items:center;
+
     justify-content:space-between;
 
     transform:
-        translateZ(45px);
+        translateZ(30px);
 
-    z-index:5;
+    z-index:4;
 }
+
 
 .folder-name{
 
-    font-size:15px;
+    font-size:14px;
 
     font-weight:700;
 
-    letter-spacing:.5px;
-
     color:#fff;
 
+    letter-spacing:.3px;
+
     transition:
-        letter-spacing .4s ease,
-        transform .4s ease;
+        letter-spacing .3s ease;
 }
+
 
 .folder-arrow{
 
-    width:30px;
-    height:30px;
+    width:29px;
+    height:29px;
+
+    border-radius:50%;
 
     display:flex;
 
     align-items:center;
     justify-content:center;
 
-    border-radius:50%;
-
     border:
-        1px solid rgba(255,255,255,.16);
+        1px solid rgba(255,255,255,.15);
 
-    color:rgba(255,255,255,.75);
+    color:
+        rgba(255,255,255,.75);
 
     transition:
-        .4s ease;
+        transform .3s ease,
+        background .3s ease;
 }
 
-/* =========================================================
-   SHINE
-========================================================= */
+
+/* =====================================================
+   FOLDER SHINE
+===================================================== */
 
 .folder-shine{
-
-    position:absolute;
-
-    inset:-100%;
-
-    z-index:10;
-
-    pointer-events:none;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent 40%,
-            rgba(255,255,255,.13) 50%,
-            transparent 60%
-        );
-
-    transform:
-        translateX(-60%)
-        rotate(8deg);
-
-    transition:
-        transform .8s ease;
-}
-
-/* =========================================================
-   HOVER FOLDER
-========================================================= */
-
-.folder-card:hover .folder-body{
-
-    transform:
-        translateZ(40px)
-        rotateX(3deg)
-        rotateY(-3deg)
-        translateY(-8px);
-
-    border-color:
-        rgba(255,255,255,.25);
-
-    box-shadow:
-        0 35px 80px rgba(0,0,0,.5),
-        0 0 35px rgba(120,120,255,.08),
-        inset 0 1px 0 rgba(255,255,255,.12);
-}
-
-.folder-card:hover .folder-preview img{
-
-    transform:
-        scale(1.045);
-}
-
-.folder-card:hover .folder-shine{
-
-    transform:
-        translateX(60%)
-        rotate(8deg);
-}
-
-.folder-card:hover .folder-name{
-
-    letter-spacing:1.5px;
-
-    transform:
-        translateX(3px);
-}
-
-.folder-card:hover .folder-arrow{
-
-    transform:
-        translateX(4px)
-        rotate(-45deg);
-
-    background:
-        rgba(255,255,255,.08);
-}
-
-/* =========================================================
-   CATEGORY VIEW
-========================================================= */
-
-.category-view{
-
-    display:none;
-
-    min-height:100vh;
-
-    padding:
-        70px 5% 100px;
-
-    animation:
-        viewIn .5s ease both;
-}
-
-.category-view.active{
-    display:block;
-}
-
-@keyframes viewIn{
-
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* category header */
-
-.category-header{
-
-    max-width:1300px;
-
-    margin:
-        0 auto 45px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:25px;
-}
-
-.category-title{
-
-    font-size:
-        clamp(32px,6vw,72px);
-
-    font-weight:900;
-
-    letter-spacing:-2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #fff,
-            #aeb7ff,
-            #fff
-        );
-
-    background-size:200% auto;
-
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    -webkit-text-fill-color:transparent;
-
-    animation:
-        titleGradient 5s linear infinite;
-}
-
-@keyframes titleGradient{
-
-    from{
-        background-position:0% center;
-    }
-
-    to{
-        background-position:200% center;
-    }
-}
-
-/* back button */
-
-.back-button{
-
-    flex-shrink:0;
-
-    border:
-        1px solid rgba(255,255,255,.18);
-
-    background:
-        rgba(255,255,255,.055);
-
-    color:#fff;
-
-    padding:
-        12px 20px;
-
-    border-radius:
-        999px;
-
-    cursor:pointer;
-
-    font-size:12px;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    transition:
-        .35s ease;
-}
-
-.back-button:hover{
-
-    background:
-        rgba(255,255,255,.12);
-
-    border-color:
-        rgba(255,255,255,.35);
-
-    transform:
-        translateX(-4px);
-}
-
-/* =========================================================
-   IMAGE GALLERY
-========================================================= */
-
-.gallery{
-
-    max-width:1300px;
-
-    margin:0 auto;
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:20px;
-}
-
-.gallery-item{
-
-    position:relative;
-
-    min-height:260px;
-
-    border-radius:
-        16px;
-
-    overflow:hidden;
-
-    cursor:pointer;
-
-    background:
-        rgba(255,255,255,.04);
-
-    border:
-        1px solid rgba(255,255,255,.12);
-
-    animation:
-        galleryAppear .7s ease both;
-
-    transition:
-        transform .4s ease,
-        border-color .4s ease,
-        box-shadow .4s ease;
-}
-
-@keyframes galleryAppear{
-
-    from{
-        opacity:0;
-        transform:
-            translateY(25px)
-            scale(.97);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
-
-.gallery-item:hover{
-
-    transform:
-        translateY(-7px);
-
-    border-color:
-        rgba(255,255,255,.27);
-
-    box-shadow:
-        0 25px 55px rgba(0,0,0,.4);
-}
-
-.gallery-item img{
-
-    width:100%;
-    height:100%;
-
-    min-height:260px;
-
-    object-fit:contain;
-
-    display:block;
-
-    background:
-        rgba(0,0,0,.08);
-
-    filter:none !important;
-
-    opacity:1 !important;
-
-    transition:
-        transform .5s ease;
-}
-
-.gallery-item:hover img{
-
-    transform:
-        scale(1.025);
-}
-
-/* image shine */
-
-.gallery-item::after{
-
-    content:"";
 
     position:absolute;
 
@@ -1210,7 +858,7 @@ main{
         linear-gradient(
             120deg,
             transparent 35%,
-            rgba(255,255,255,.09) 50%,
+            rgba(255,255,255,.10) 50%,
             transparent 65%
         );
 
@@ -1218,18 +866,263 @@ main{
         translateX(-120%);
 
     transition:
-        transform .7s ease;
+        transform .65s ease;
+
+    z-index:6;
 }
 
-.gallery-item:hover::after{
+
+.folder-card:hover
+.folder-shine{
 
     transform:
         translateX(120%);
 }
 
-/* =========================================================
+
+/* =====================================================
+   FOLDER HOVER 3D
+===================================================== */
+
+.folder-card:hover
+.folder-body{
+
+    transform:
+        translateZ(35px)
+        rotateX(2deg)
+        rotateY(-2deg)
+        translateY(-7px);
+
+    border-color:
+        rgba(255,255,255,.23);
+
+    box-shadow:
+        0 28px 60px rgba(0,0,0,.45),
+        0 0 25px rgba(100,120,255,.07);
+}
+
+
+.folder-card:hover
+.folder-name{
+
+    letter-spacing:1px;
+}
+
+
+.folder-card:hover
+.folder-arrow{
+
+    transform:
+        translateX(4px);
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+
+/* =====================================================
+   CATEGORY VIEW
+===================================================== */
+
+.category-view{
+
+    display:none;
+
+    min-height:100vh;
+
+    padding:
+        55px 5% 80px;
+
+    background:
+        #05060b;
+}
+
+
+.category-view.active{
+    display:block;
+
+    animation:
+        fadeIn .35s ease both;
+}
+
+
+/* =====================================================
+   CATEGORY HEADER
+===================================================== */
+
+.category-header{
+
+    width:
+        min(1200px,100%);
+
+    margin:
+        0 auto 35px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+}
+
+
+.category-title{
+
+    font-size:
+        clamp(35px,6vw,70px);
+
+    font-weight:900;
+
+    letter-spacing:-2px;
+
+    color:#fff;
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.back-button{
+
+    border:
+        1px solid rgba(255,255,255,.17);
+
+    background:
+        rgba(255,255,255,.05);
+
+    color:#fff;
+
+    padding:
+        11px 18px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    cursor:pointer;
+
+    transition:
+        .25s ease;
+}
+
+
+.back-button:hover{
+
+    background:
+        rgba(255,255,255,.11);
+
+    transform:
+        translateX(-3px);
+}
+
+
+/* =====================================================
+   GALLERY
+===================================================== */
+
+.gallery{
+
+    width:
+        min(1200px,100%);
+
+    margin:0 auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:18px;
+}
+
+
+.gallery-item{
+
+    min-height:250px;
+
+    overflow:hidden;
+
+    border-radius:14px;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    background:
+        rgba(255,255,255,.025);
+
+    cursor:pointer;
+
+    animation:
+        galleryIn .5s ease both;
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease;
+}
+
+
+@keyframes galleryIn{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0);
+    }
+}
+
+
+.gallery-item:hover{
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(255,255,255,.24);
+}
+
+
+.gallery-item img{
+
+    width:100%;
+    height:100%;
+
+    min-height:250px;
+
+    display:block;
+
+    object-fit:contain;
+
+    background:
+        rgba(0,0,0,.05);
+
+    opacity:1 !important;
+
+    filter:none !important;
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+    pointer-events:none;
+}
+
+
+/* =====================================================
    LIGHTBOX
-========================================================= */
+===================================================== */
 
 .lightbox{
 
@@ -1237,45 +1130,40 @@ main{
 
     inset:0;
 
-    z-index:10000;
+    z-index:9999;
 
     display:none;
 
     align-items:center;
     justify-content:center;
 
-    padding:30px;
+    padding:25px;
 
     background:
-        rgba(3,3,8,.92);
+        rgba(3,4,9,.94);
 
     backdrop-filter:
-        blur(20px);
+        blur(10px);
 
     -webkit-backdrop-filter:
-        blur(20px);
+        blur(10px);
 }
+
 
 .lightbox.active{
     display:flex;
 }
 
+
 .lightbox img{
 
-    max-width:
-        94vw;
+    max-width:94vw;
 
-    max-height:
-        88vh;
+    max-height:88vh;
 
     object-fit:contain;
 
-    border-radius:
-        10px;
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.7),
-        0 0 40px rgba(120,130,255,.08);
+    border-radius:8px;
 
     user-select:none;
 
@@ -1284,15 +1172,16 @@ main{
     pointer-events:none;
 
     animation:
-        lightboxIn .35s ease both;
+        lightboxIn .25s ease both;
 }
+
 
 @keyframes lightboxIn{
 
     from{
         opacity:0;
         transform:
-            scale(.94);
+            scale(.96);
     }
 
     to{
@@ -1302,28 +1191,24 @@ main{
     }
 }
 
+
 .lightbox-close{
 
     position:absolute;
 
-    top:25px;
-    right:30px;
+    top:22px;
+    right:25px;
 
-    width:45px;
-    height:45px;
+    width:42px;
+    height:42px;
 
     border-radius:50%;
 
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
+    border:
+        1px solid rgba(255,255,255,.17);
 
     background:
-        rgba(255,255,255,.08);
-
-    border:
-        1px solid rgba(255,255,255,.16);
+        rgba(255,255,255,.07);
 
     color:#fff;
 
@@ -1332,60 +1217,45 @@ main{
     cursor:pointer;
 
     transition:
-        .3s ease;
+        .25s ease;
 }
+
 
 .lightbox-close:hover{
 
     background:
-        rgba(255,255,255,.15);
+        rgba(255,255,255,.13);
 
     transform:
         rotate(90deg);
 }
 
-/* =========================================================
+
+/* =====================================================
    FOOTER
-========================================================= */
+===================================================== */
 
 footer{
 
+    padding:
+        10px 20px 40px;
+
     text-align:center;
 
-    padding:
-        20px 20px 45px;
-
     color:
-        rgba(255,255,255,.25);
+        rgba(255,255,255,.23);
 
-    font-size:10px;
+    font-size:9px;
 
     letter-spacing:3px;
 
     text-transform:uppercase;
 }
 
-/* =========================================================
-   PROTECTION OVERLAY
-========================================================= */
 
-.protection-layer{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:9998;
-
-    pointer-events:none;
-
-    background:
-        transparent;
-}
-
-/* =========================================================
+/* =====================================================
    MOBILE
-========================================================= */
+===================================================== */
 
 @media(max-width:900px){
 
@@ -1399,81 +1269,170 @@ footer{
             repeat(2,1fr);
     }
 
-    .title-wrap{
-        height:310px;
-    }
-
-    .glass-lens{
-        --lens-size:130px;
-    }
-
 }
+
 
 @media(max-width:600px){
 
     .hero{
-        min-height:78vh;
-        padding-top:55px;
+
+        min-height:65vh;
+
+        padding:
+            45px 15px 25px;
     }
 
+
     .hero-label{
+
+        font-size:8px;
+
         letter-spacing:4px;
+
         margin-bottom:15px;
     }
 
+
     .title-wrap{
+
         width:96vw;
-        height:245px;
+
+        height:225px;
     }
+
 
     .word{
-        font-size:
-            clamp(58px,19vw,100px);
 
-        letter-spacing:3px;
+        font-size:
+            clamp(55px,18vw,95px);
+
+        letter-spacing:2px;
     }
+
 
     .word:first-child{
         margin-bottom:12px;
     }
 
-    .glass-lens{
-        --lens-size:100px;
+
+    .lens{
+
+        width:100px;
+        height:100px;
+
+        animation-name:
+            lensMoveMobile;
     }
+
+
+    @keyframes lensMoveMobile{
+
+        0%,
+        100%{
+            transform:
+                translate3d(-50%,-50%,0)
+                translateY(-52px);
+        }
+
+        50%{
+            transform:
+                translate3d(-50%,-50%,0)
+                translateY(52px);
+        }
+    }
+
+
+    .lens-text{
+
+        width:96vw;
+
+        height:225px;
+    }
+
+
+    .lens-text .word{
+
+        font-size:
+            clamp(55px,18vw,95px);
+    }
+
 
     .hero-subtitle{
-        font-size:9px;
-        letter-spacing:3px;
+
+        font-size:8px;
+
+        letter-spacing:2px;
+
+        margin-top:12px;
     }
+
+
+    .portfolio-section{
+
+        width:92%;
+
+        padding-bottom:60px;
+    }
+
 
     .folder-grid{
+
         grid-template-columns:1fr;
-        gap:25px;
+
+        gap:22px;
     }
+
 
     .folder-card{
-        height:280px;
+
+        height:260px;
     }
 
+
     .gallery{
+
         grid-template-columns:1fr;
     }
 
+
     .category-header{
-        align-items:flex-start;
+
         flex-direction:column;
+
+        align-items:flex-start;
     }
+
 
     .back-button{
         order:-1;
     }
 
+
     .category-title{
+
         font-size:42px;
     }
 
-    .category-view{
-        padding-top:35px;
+}
+
+
+/* =====================================================
+   REDUCE MOTION
+===================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.01ms !important;
+
+        animation-iteration-count:1 !important;
+
+        scroll-behavior:auto !important;
+
+        transition-duration:.01ms !important;
     }
 
 }
@@ -1484,397 +1443,391 @@ footer{
 
 <body>
 
-<!-- ======================================================
+
+<!-- =====================================================
      BACKGROUND
-====================================================== -->
+===================================================== -->
 
-<div class="aurora"></div>
+<div class="background-light"></div>
 
-<div class="particles" id="particles"></div>
+<div
+    class="particles"
+    id="particles"
+></div>
 
-<div class="cursor-glow" id="cursorGlow"></div>
 
-<div class="protection-layer"></div>
-
-
-<!-- ======================================================
-     MAIN PORTFOLIO HOME
-====================================================== -->
+<!-- =====================================================
+     HOME
+===================================================== -->
 
 <main id="homePage">
 
-<section class="hero">
 
-    <div class="hero-label">
-        Creative Visual Portfolio
-    </div>
+    <section class="hero">
 
 
-    <!-- ==================================================
-         PORT / FOLIO TITLE
-    ================================================== -->
-
-    <div
-        class="title-wrap"
-        id="titleWrap"
-    >
-
-        <!-- normal sharp typography -->
-
-        <div class="title-normal">
-
-            <span class="word">
-                PORT
-            </span>
-
-            <span class="word">
-                FOLIO
-            </span>
-
+        <div class="hero-label">
+            Creative Visual Portfolio
         </div>
 
 
-        <!-- refracted copy -->
+        <!-- =================================================
+             MAIN PORT / FOLIO
+        ================================================== -->
 
-        <div
-            class="title-refract"
-            aria-hidden="true"
-        >
-
-            <span class="word">
-                PORT
-            </span>
-
-            <span class="word">
-                FOLIO
-            </span>
-
-        </div>
+        <div class="title-wrap">
 
 
-        <!-- moving glass lens -->
+            <!-- normal title -->
 
-        <div
-            class="glass-lens"
-            aria-hidden="true"
-        ></div>
+            <div class="title-normal">
 
-    </div>
+                <span class="word">
+                    PORT
+                </span>
 
+                <span class="word">
+                    FOLIO
+                </span>
 
-    <div class="hero-subtitle">
-        VTuber • Branding • Illustration • Visual Design
-    </div>
-
-</section>
+            </div>
 
 
-<!-- ======================================================
-     CATEGORY SECTION
-====================================================== -->
+            <!-- =================================================
+                 MOVING GLASS LENS
 
-<section class="portfolio-section">
+                 Lens stays over PORT/FOLIO only.
+            ================================================== -->
 
-    <div class="section-heading">
-
-        <h2>
-            Selected Works
-        </h2>
-
-        <div class="section-line"></div>
-
-    </div>
+            <div class="lens">
 
 
-    <div
-        class="folder-grid"
-        id="folderGrid"
-    >
+                <div class="lens-text">
 
-        <!-- ==============================================
-             VTUBER MODEL
-        =============================================== -->
+                    <span class="word">
+                        PORT
+                    </span>
 
-        <div
-            class="folder-card"
-            data-category="VTuber Model"
-        >
-
-            <div class="folder-body">
-
-                <div class="folder-tab"></div>
-
-                <div class="folder-preview">
-
-                    <img
-                        src="Png%20model%201.jpeg"
-                        alt="VTuber Model"
-                        draggable="false"
-                    >
+                    <span class="word">
+                        FOLIO
+                    </span>
 
                 </div>
 
-                <div class="folder-shine"></div>
 
-                <div class="folder-bottom">
+            </div>
 
-                    <div class="folder-name">
-                        VTuber Model
+
+        </div>
+
+
+        <div class="hero-subtitle">
+            VTuber • Branding • Illustration • Visual Design
+        </div>
+
+
+    </section>
+
+
+    <!-- =====================================================
+         CATEGORIES
+    ====================================================== -->
+
+    <section class="portfolio-section">
+
+
+        <div class="section-heading">
+
+            <h2>
+                Selected Works
+            </h2>
+
+            <div class="section-line"></div>
+
+        </div>
+
+
+        <div class="folder-grid">
+
+
+            <!-- =================================================
+                 VTUBER
+            ================================================== -->
+
+            <div
+                class="folder-card"
+                data-category="VTuber Model"
+            >
+
+                <div class="folder-body">
+
+                    <div class="folder-tab"></div>
+
+                    <div class="folder-preview">
+
+                        <img
+                            src="Png%20model%201.jpeg"
+                            alt="VTuber Model"
+                            draggable="false"
+                        >
+
                     </div>
 
-                    <div class="folder-arrow">
-                        →
+                    <div class="folder-shine"></div>
+
+                    <div class="folder-bottom">
+
+                        <div class="folder-name">
+                            VTuber Model
+                        </div>
+
+                        <div class="folder-arrow">
+                            →
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
 
-        </div>
 
+            <!-- =================================================
+                 LOGO
+            ================================================== -->
 
-        <!-- ==============================================
-             LOGO
-        =============================================== -->
+            <div
+                class="folder-card"
+                data-category="Logo"
+            >
 
-        <div
-            class="folder-card"
-            data-category="Logo"
-        >
+                <div class="folder-body">
 
-            <div class="folder-body">
+                    <div class="folder-tab"></div>
 
-                <div class="folder-tab"></div>
+                    <div class="folder-preview">
 
-                <div class="folder-preview">
+                        <img
+                            src="logo%201.jpeg"
+                            alt="Logo"
+                            draggable="false"
+                        >
 
-                    <img
-                        src="logo%201.jpeg"
-                        alt="Logo"
-                        draggable="false"
-                    >
-
-                </div>
-
-                <div class="folder-shine"></div>
-
-                <div class="folder-bottom">
-
-                    <div class="folder-name">
-                        Logo
                     </div>
 
-                    <div class="folder-arrow">
-                        →
-                    </div>
+                    <div class="folder-shine"></div>
 
-                </div>
+                    <div class="folder-bottom">
 
-            </div>
+                        <div class="folder-name">
+                            Logo
+                        </div>
 
-        </div>
+                        <div class="folder-arrow">
+                            →
+                        </div>
 
-
-        <!-- ==============================================
-             BANNER
-        =============================================== -->
-
-        <div
-            class="folder-card"
-            data-category="Banner"
-        >
-
-            <div class="folder-body">
-
-                <div class="folder-tab"></div>
-
-                <div class="folder-preview">
-
-                    <img
-                        src="Banner1.jpeg"
-                        alt="Banner"
-                        draggable="false"
-                    >
-
-                </div>
-
-                <div class="folder-shine"></div>
-
-                <div class="folder-bottom">
-
-                    <div class="folder-name">
-                        Banner
-                    </div>
-
-                    <div class="folder-arrow">
-                        →
                     </div>
 
                 </div>
 
             </div>
 
-        </div>
 
+            <!-- =================================================
+                 BANNER
+            ================================================== -->
 
-        <!-- ==============================================
-             EMOTES
-        =============================================== -->
+            <div
+                class="folder-card"
+                data-category="Banner"
+            >
 
-        <div
-            class="folder-card"
-            data-category="Emotes"
-        >
+                <div class="folder-body">
 
-            <div class="folder-body">
+                    <div class="folder-tab"></div>
 
-                <div class="folder-tab"></div>
+                    <div class="folder-preview">
 
-                <div class="folder-preview">
+                        <img
+                            src="Banner1.jpeg"
+                            alt="Banner"
+                            draggable="false"
+                        >
 
-                    <img
-                        src="Emotes%201.jpeg"
-                        alt="Emotes"
-                        draggable="false"
-                    >
-
-                </div>
-
-                <div class="folder-shine"></div>
-
-                <div class="folder-bottom">
-
-                    <div class="folder-name">
-                        Emotes
                     </div>
 
-                    <div class="folder-arrow">
-                        →
-                    </div>
+                    <div class="folder-shine"></div>
 
-                </div>
+                    <div class="folder-bottom">
 
-            </div>
+                        <div class="folder-name">
+                            Banner
+                        </div>
 
-        </div>
+                        <div class="folder-arrow">
+                            →
+                        </div>
 
-
-        <!-- ==============================================
-             ARTSCENE
-        =============================================== -->
-
-        <div
-            class="folder-card"
-            data-category="Artscene"
-        >
-
-            <div class="folder-body">
-
-                <div class="folder-tab"></div>
-
-                <div class="folder-preview">
-
-                    <img
-                        src="Artscene%201.jpeg"
-                        alt="Artscene"
-                        draggable="false"
-                    >
-
-                </div>
-
-                <div class="folder-shine"></div>
-
-                <div class="folder-bottom">
-
-                    <div class="folder-name">
-                        Artscene
-                    </div>
-
-                    <div class="folder-arrow">
-                        →
                     </div>
 
                 </div>
 
             </div>
 
-        </div>
 
+            <!-- =================================================
+                 EMOTES
+            ================================================== -->
 
-        <!-- ==============================================
-             OVERLAY
-        =============================================== -->
+            <div
+                class="folder-card"
+                data-category="Emotes"
+            >
 
-        <div
-            class="folder-card"
-            data-category="Overlay"
-        >
+                <div class="folder-body">
 
-            <div class="folder-body">
+                    <div class="folder-tab"></div>
 
-                <div class="folder-tab"></div>
+                    <div class="folder-preview">
 
-                <div class="folder-preview">
+                        <img
+                            src="Emotes%201.jpeg"
+                            alt="Emotes"
+                            draggable="false"
+                        >
 
-                    <img
-                        src="Overlay%201.jpeg"
-                        alt="Overlay"
-                        draggable="false"
-                    >
-
-                </div>
-
-                <div class="folder-shine"></div>
-
-                <div class="folder-bottom">
-
-                    <div class="folder-name">
-                        Overlay
                     </div>
 
-                    <div class="folder-arrow">
-                        →
+                    <div class="folder-shine"></div>
+
+                    <div class="folder-bottom">
+
+                        <div class="folder-name">
+                            Emotes
+                        </div>
+
+                        <div class="folder-arrow">
+                            →
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
 
+
+            <!-- =================================================
+                 ARTSCENE
+            ================================================== -->
+
+            <div
+                class="folder-card"
+                data-category="Artscene"
+            >
+
+                <div class="folder-body">
+
+                    <div class="folder-tab"></div>
+
+                    <div class="folder-preview">
+
+                        <img
+                            src="Artscene%201.jpeg"
+                            alt="Artscene"
+                            draggable="false"
+                        >
+
+                    </div>
+
+                    <div class="folder-shine"></div>
+
+                    <div class="folder-bottom">
+
+                        <div class="folder-name">
+                            Artscene
+                        </div>
+
+                        <div class="folder-arrow">
+                            →
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 OVERLAY
+            ================================================== -->
+
+            <div
+                class="folder-card"
+                data-category="Overlay"
+            >
+
+                <div class="folder-body">
+
+                    <div class="folder-tab"></div>
+
+                    <div class="folder-preview">
+
+                        <img
+                            src="Overlay%201.jpeg"
+                            alt="Overlay"
+                            draggable="false"
+                        >
+
+                    </div>
+
+                    <div class="folder-shine"></div>
+
+                    <div class="folder-bottom">
+
+                        <div class="folder-name">
+                            Overlay
+                        </div>
+
+                        <div class="folder-arrow">
+                            →
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<footer>
-    © PORTFOLIO — Creative Visual Works
-</footer>
+    <footer>
+        © PORTFOLIO — Creative Visual Works
+    </footer>
+
 
 </main>
 
 
-<!-- ======================================================
+
+<!-- =====================================================
      CATEGORY PAGE
-====================================================== -->
+===================================================== -->
 
 <section
     class="category-view"
     id="categoryView"
 >
 
+
     <div class="category-header">
 
-        <div>
-
-            <div
-                class="category-title"
-                id="categoryTitle"
-            >
-                VTuber Model
-            </div>
-
-        </div>
 
         <button
             class="back-button"
@@ -1882,6 +1835,15 @@ footer{
         >
             ← Back
         </button>
+
+
+        <div
+            class="category-title"
+            id="categoryTitle"
+        >
+            VTuber Model
+        </div>
+
 
     </div>
 
@@ -1891,25 +1853,28 @@ footer{
         id="gallery"
     ></div>
 
+
 </section>
 
 
-<!-- ======================================================
+
+<!-- =====================================================
      LIGHTBOX
-====================================================== -->
+===================================================== -->
 
 <div
     class="lightbox"
     id="lightbox"
 >
 
+
     <button
         class="lightbox-close"
         id="lightboxClose"
-        aria-label="Close"
     >
         ×
     </button>
+
 
     <img
         id="lightboxImage"
@@ -1918,19 +1883,20 @@ footer{
         draggable="false"
     >
 
+
 </div>
+
 
 
 <script>
 
-/* =========================================================
+/* =====================================================
    IMAGE DATA
-========================================================= */
+===================================================== */
 
 const categories = {
 
     "VTuber Model":[
-
         "Png model 1.jpeg",
         "Png model 2.jpeg",
         "Png model 3.jpeg",
@@ -1939,21 +1905,17 @@ const categories = {
         "Png model 6.jpeg",
         "Png model 7.jpeg",
         "Png model 8.jpeg"
-
     ],
 
     "Logo":[
-
         "logo 1.jpeg",
         "logo4.jpeg",
         "logo5.jpeg",
         "Logo2.jpeg",
         "Logo3.jpeg"
-
     ],
 
     "Banner":[
-
         "Banner1.jpeg",
         "Banner3.jpeg",
         "Banner7.jpeg",
@@ -1961,36 +1923,29 @@ const categories = {
         "banner5.jpeg",
         "banner4.jpeg",
         "banner2.jpeg"
-
     ],
 
     "Emotes":[
-
         "Emotes 1.jpeg",
         "Emotes 2.jpeg",
         "Emotes 3.jpeg",
         "Emotes 4.jpeg"
-
     ],
 
     "Artscene":[
-
         "Artscene 1.jpeg"
-
     ],
 
     "Overlay":[
-
         "Overlay 1.jpeg"
-
     ]
 
 };
 
 
-/* =========================================================
+/* =====================================================
    ELEMENTS
-========================================================= */
+===================================================== */
 
 const homePage =
     document.getElementById("homePage");
@@ -2016,18 +1971,10 @@ const lightboxImage =
 const lightboxClose =
     document.getElementById("lightboxClose");
 
-const titleWrap =
-    document.getElementById("titleWrap");
 
-const words =
-    [...document.querySelectorAll(
-        ".title-normal .word"
-    )];
-
-
-/* =========================================================
+/* =====================================================
    IMAGE PATH
-========================================================= */
+===================================================== */
 
 function imagePath(file){
 
@@ -2036,9 +1983,9 @@ function imagePath(file){
 }
 
 
-/* =========================================================
+/* =====================================================
    OPEN CATEGORY
-========================================================= */
+===================================================== */
 
 function openCategory(category){
 
@@ -2052,7 +1999,9 @@ function openCategory(category){
     categoryTitle.textContent =
         category;
 
-    gallery.innerHTML = "";
+    gallery.innerHTML =
+        "";
+
 
     const images =
         categories[category] || [];
@@ -2060,6 +2009,7 @@ function openCategory(category){
 
     images.forEach(
         (file,index)=>{
+
 
             const item =
                 document.createElement(
@@ -2069,14 +2019,16 @@ function openCategory(category){
             item.className =
                 "gallery-item";
 
+
             item.style.animationDelay =
-                `${index * 0.06}s`;
+                `${index * 0.04}s`;
 
 
             const img =
                 document.createElement(
                     "img"
                 );
+
 
             img.src =
                 imagePath(file);
@@ -2087,13 +2039,19 @@ function openCategory(category){
             img.draggable =
                 false;
 
+            /*
+               Lazy load gallery images
+               to reduce initial loading.
+            */
+
+            img.loading =
+                "lazy";
+
 
             item.appendChild(img);
 
             gallery.appendChild(item);
 
-
-            /* open lightbox */
 
             item.addEventListener(
                 "click",
@@ -2108,67 +2066,65 @@ function openCategory(category){
     );
 
 
-    window.scrollTo({
-        top:0,
-        behavior:"instant"
-    });
-
-}
-
-
-/* =========================================================
-   BACK TO HOME
-========================================================= */
-
-function goHome(){
-
-    categoryView.classList.remove(
-        "active"
+    window.scrollTo(
+        0,
+        0
     );
 
-    homePage.style.display =
-        "block";
-
-    window.scrollTo({
-        top:0,
-        behavior:"instant"
-    });
-
 }
 
 
-backButton.addEventListener(
-    "click",
-    goHome
-);
-
-
-/* =========================================================
+/* =====================================================
    FOLDER CLICK
-========================================================= */
+===================================================== */
 
 document
 .querySelectorAll(".folder-card")
-.forEach(card=>{
+.forEach(
+    card=>{
 
-    card.addEventListener(
-        "click",
-        ()=>{
+        card.addEventListener(
+            "click",
+            ()=>{
 
-            const category =
-                card.dataset.category;
+                openCategory(
+                    card.dataset.category
+                );
 
-            openCategory(category);
+            }
+        );
 
-        }
-    );
-
-});
+    }
+);
 
 
-/* =========================================================
+/* =====================================================
+   BACK
+===================================================== */
+
+backButton.addEventListener(
+    "click",
+    ()=>{
+
+        categoryView.classList.remove(
+            "active"
+        );
+
+        homePage.style.display =
+            "block";
+
+        window.scrollTo(
+            0,
+            0
+        );
+
+    }
+);
+
+
+/* =====================================================
    LIGHTBOX
-========================================================= */
+===================================================== */
 
 function openLightbox(src){
 
@@ -2211,7 +2167,8 @@ lightbox.addEventListener(
     event=>{
 
         if(
-            event.target === lightbox
+            event.target ===
+            lightbox
         ){
 
             closeLightbox();
@@ -2222,16 +2179,17 @@ lightbox.addEventListener(
 );
 
 
-/* =========================================================
-   ESC CLOSE
-========================================================= */
+/* =====================================================
+   ESC
+===================================================== */
 
 document.addEventListener(
     "keydown",
     event=>{
 
         if(
-            event.key === "Escape"
+            event.key ===
+            "Escape"
         ){
 
             closeLightbox();
@@ -2242,323 +2200,81 @@ document.addEventListener(
 );
 
 
-/* =========================================================
-   PREMIUM PORT/FOLIO LENS
-   IMPORTANT:
-   Lens moves between the actual PORT and FOLIO
-   text positions only.
-========================================================= */
-
-let lensStart =
-    performance.now();
-
-
-function animateLens(now){
-
-    const elapsed =
-        (now - lensStart) / 1000;
-
-
-    const wrapRect =
-        titleWrap.getBoundingClientRect();
-
-
-    const wordRects =
-        words.map(
-            word =>
-                word.getBoundingClientRect()
-        );
-
-
-    if(
-        wordRects.length < 2 ||
-        wrapRect.height <= 0
-    ){
-
-        requestAnimationFrame(
-            animateLens
-        );
-
-        return;
-
-    }
-
-
-    /*
-       Smooth 0 → 1 → 0 movement.
-
-       This means:
-
-       PORT
-         ↓
-       FOLIO
-         ↓
-       PORT
-
-       The lens center never wanders
-       into the empty page area.
-    */
-
-    const phase =
-        (
-            Math.sin(
-                elapsed * 0.62
-            ) + 1
-        ) / 2;
-
-
-    const portRect =
-        wordRects[0];
-
-    const folioRect =
-        wordRects[1];
-
-
-    const portCenterY =
-        portRect.top +
-        portRect.height / 2;
-
-
-    const folioCenterY =
-        folioRect.top +
-        folioRect.height / 2;
-
-
-    /*
-       Exact vertical position
-       between PORT and FOLIO.
-    */
-
-    const lensCenterY =
-        portCenterY +
-        (
-            folioCenterY -
-            portCenterY
-        ) *
-        phase;
-
-
-    const lensY =
-        (
-            (
-                lensCenterY -
-                wrapRect.top
-            )
-            /
-            wrapRect.height
-        )
-        * 100;
-
-
-    /*
-       Keep lens horizontally
-       over the typography.
-
-       Very subtle side movement only.
-    */
-
-    const lensX =
-        50 +
-        Math.sin(
-            elapsed * 0.42
-        ) * 5;
-
-
-    titleWrap.style.setProperty(
-        "--lens-x",
-        lensX + "%"
-    );
-
-
-    titleWrap.style.setProperty(
-        "--lens-y",
-        lensY + "%"
-    );
-
-
-    requestAnimationFrame(
-        animateLens
-    );
-
-}
-
-
-requestAnimationFrame(
-    animateLens
-);
-
-
-/* =========================================================
-   FOLDER 3D TILT
-========================================================= */
-
-document
-.querySelectorAll(".folder-card")
-.forEach(card=>{
-
-    card.addEventListener(
-        "mousemove",
-        event=>{
-
-            const rect =
-                card.getBoundingClientRect();
-
-
-            const x =
-                event.clientX -
-                rect.left;
-
-
-            const y =
-                event.clientY -
-                rect.top;
-
-
-            const centerX =
-                rect.width / 2;
-
-
-            const centerY =
-                rect.height / 2;
-
-
-            const rotateY =
-                (
-                    (x - centerX)
-                    /
-                    centerX
-                ) * 5;
-
-
-            const rotateX =
-                -(
-                    (y - centerY)
-                    /
-                    centerY
-                ) * 5;
-
-
-            card.style.transform =
-                `
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-                translateY(-4px)
-                scale(1.01)
-                `;
-
-        }
-    );
-
-
-    card.addEventListener(
-        "mouseleave",
-        ()=>{
-
-            card.style.transform =
-                "";
-
-        }
-    );
-
-});
-
-
-/* =========================================================
-   CURSOR GLOW
-========================================================= */
-
-const cursorGlow =
-    document.getElementById(
-        "cursorGlow"
-    );
-
-
-document.addEventListener(
-    "mousemove",
-    event=>{
-
-        cursorGlow.style.left =
-            event.clientX + "px";
-
-        cursorGlow.style.top =
-            event.clientY + "px";
-
-    }
-);
-
-
-/* =========================================================
-   PARTICLES
-========================================================= */
-
-const particles =
+/* =====================================================
+   LIGHTWEIGHT PARTICLES
+===================================================== */
+
+const particleContainer =
     document.getElementById(
         "particles"
     );
 
 
+/*
+   Only 18 particles.
+   Much lighter than the previous version.
+*/
+
 for(
     let i=0;
-    i<55;
+    i<18;
     i++
 ){
 
     const particle =
         document.createElement(
-            "div"
+            "span"
         );
+
 
     particle.className =
         "particle";
 
 
     particle.style.left =
-        Math.random() * 100 + "%";
-
-
-    particle.style.animationDuration =
-        (8 + Math.random()*12) + "s";
+        Math.random()*100 +
+        "%";
 
 
     particle.style.animationDelay =
-        (-Math.random()*15) + "s";
+        -(Math.random()*12) +
+        "s";
 
 
-    particle.style.opacity =
-        .2 +
-        Math.random()*.7;
+    particle.style.animationDuration =
+        (9 + Math.random()*7) +
+        "s";
 
 
-    particle.style.transform =
-        `scale(${.5 + Math.random()*1.5})`;
-
-
-    particles.appendChild(
+    particleContainer.appendChild(
         particle
     );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    IMAGE PROTECTION
-   NOTE:
-   This is deterrence only. Screenshots and browser
-   developer tools can never be completely blocked.
-========================================================= */
+===================================================== */
 
 
-/* disable right click */
+/*
+   Right click
+*/
 
 document.addEventListener(
     "contextmenu",
     event=>{
+
         event.preventDefault();
+
     }
 );
 
 
-/* disable image dragging */
+/*
+   Image dragging
+*/
 
 document.addEventListener(
     "dragstart",
@@ -2577,7 +2293,9 @@ document.addEventListener(
 );
 
 
-/* disable text selection */
+/*
+   Text selection
+*/
 
 document.addEventListener(
     "selectstart",
@@ -2589,7 +2307,9 @@ document.addEventListener(
 );
 
 
-/* common save / source / devtools shortcuts */
+/*
+   Common save/source shortcuts
+*/
 
 document.addEventListener(
     "keydown",
@@ -2599,9 +2319,7 @@ document.addEventListener(
             event.key.toLowerCase();
 
 
-        /*
-           Ctrl+S
-        */
+        /* Ctrl + S */
 
         if(
             event.ctrlKey &&
@@ -2609,14 +2327,11 @@ document.addEventListener(
         ){
 
             event.preventDefault();
-            return;
 
         }
 
 
-        /*
-           Ctrl+U
-        */
+        /* Ctrl + U */
 
         if(
             event.ctrlKey &&
@@ -2624,16 +2339,34 @@ document.addEventListener(
         ){
 
             event.preventDefault();
-            return;
 
         }
 
 
-        /*
-           Ctrl+Shift+I
-           Ctrl+Shift+J
-           Ctrl+Shift+C
-        */
+        /* Ctrl + P */
+
+        if(
+            event.ctrlKey &&
+            key === "p"
+        ){
+
+            event.preventDefault();
+
+        }
+
+
+        /* F12 */
+
+        if(
+            event.key === "F12"
+        ){
+
+            event.preventDefault();
+
+        }
+
+
+        /* DevTools shortcuts */
 
         if(
             event.ctrlKey &&
@@ -2646,36 +2379,6 @@ document.addEventListener(
         ){
 
             event.preventDefault();
-            return;
-
-        }
-
-
-        /*
-           F12
-        */
-
-        if(
-            event.key === "F12"
-        ){
-
-            event.preventDefault();
-            return;
-
-        }
-
-
-        /*
-           Ctrl+P
-        */
-
-        if(
-            event.ctrlKey &&
-            key === "p"
-        ){
-
-            event.preventDefault();
-            return;
 
         }
 
@@ -2683,9 +2386,9 @@ document.addEventListener(
 );
 
 
-/* =========================================================
-   MOBILE LONG PRESS DETERRENCE
-========================================================= */
+/*
+   Mobile long press / image interaction
+*/
 
 document.addEventListener(
     "touchstart",
@@ -2707,9 +2410,9 @@ document.addEventListener(
 );
 
 
-/* =========================================================
-   PREVENT IMAGE OPEN IN NEW TAB
-========================================================= */
+/*
+   Prevent middle-click image opening
+*/
 
 document.addEventListener(
     "auxclick",
@@ -2725,29 +2428,6 @@ document.addEventListener(
         }
 
     }
-);
-
-
-/* =========================================================
-   HISTORY / BACK BUTTON SUPPORT
-========================================================= */
-
-window.addEventListener(
-    "popstate",
-    ()=>{
-
-        goHome();
-
-    }
-);
-
-
-/* =========================================================
-   FINISH
-========================================================= */
-
-console.log(
-    "Portfolio loaded."
 );
 
 </script>
