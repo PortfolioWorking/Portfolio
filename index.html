@@ -3,11 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07070a">
-<title>PORTFOLIO — Creative Studio</title>
+
+<title>PORTFOLIO</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
     margin:0;
@@ -17,1704 +20,2734 @@
 
 html{
     scroll-behavior:smooth;
-    background:#050507;
 }
 
 body{
     min-height:100vh;
-    overflow-x:hidden;
-    background:
-        radial-gradient(circle at 50% -10%, rgba(255,255,255,.055), transparent 32%),
-        #050507;
+    background:#050508;
     color:#fff;
-    font-family:Inter,Arial,sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
+    overflow-x:hidden;
     user-select:none;
     -webkit-user-select:none;
+    -webkit-touch-callout:none;
 }
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
 
 body::before{
     content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
-    z-index:9998;
+    z-index:-5;
+
     background:
-        linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);
-    background-size:55px 55px;
-    mask-image:linear-gradient(to bottom,black,transparent 85%);
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(100,70,255,.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(0,220,255,.13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(255,0,160,.10),
+            transparent 35%
+        );
 }
 
-#particles{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    z-index:0;
-}
-
-/* =========================
-   CURSOR GLOW
-========================= */
-
-.cursorGlow{
-    position:fixed;
-    width:320px;
-    height:320px;
-    border-radius:50%;
-    pointer-events:none;
-    z-index:1;
-    transform:translate(-50%,-50%);
-    background:radial-gradient(
-        circle,
-        rgba(255,255,255,.045),
-        rgba(120,100,255,.018) 35%,
-        transparent 70%
-    );
-    filter:blur(8px);
-}
-
-/* =========================
-   AURORA
-========================= */
+/* moving aurora */
 
 .aurora{
     position:fixed;
-    inset:0;
-    overflow:hidden;
+    inset:-20%;
+    z-index:-4;
     pointer-events:none;
-    z-index:0;
+
+    background:
+        radial-gradient(
+            ellipse at 30% 30%,
+            rgba(110,80,255,.13),
+            transparent 40%
+        ),
+        radial-gradient(
+            ellipse at 70% 60%,
+            rgba(0,210,255,.09),
+            transparent 40%
+        ),
+        radial-gradient(
+            ellipse at 50% 90%,
+            rgba(255,0,170,.08),
+            transparent 35%
+        );
+
+    filter:blur(60px);
+
+    animation:
+        auroraMove 14s ease-in-out infinite alternate;
 }
 
-.blob{
-    position:absolute;
-    border-radius:50%;
-    filter:blur(100px);
-    opacity:.16;
-    animation:floatBlob 15s ease-in-out infinite alternate;
-}
+@keyframes auroraMove{
 
-.blob.one{
-    width:420px;
-    height:420px;
-    background:#6c5ce7;
-    top:-180px;
-    left:-120px;
-}
-
-.blob.two{
-    width:360px;
-    height:360px;
-    background:#0077ff;
-    right:-120px;
-    top:28%;
-    animation-delay:-5s;
-}
-
-.blob.three{
-    width:450px;
-    height:450px;
-    background:#b44cff;
-    left:30%;
-    bottom:-280px;
-    animation-delay:-9s;
-}
-
-@keyframes floatBlob{
-    from{
-        transform:translate3d(0,0,0) scale(1);
+    0%{
+        transform:
+            translate(-3%, -2%)
+            scale(1);
     }
-    to{
-        transform:translate3d(60px,-40px,0) scale(1.12);
+
+    50%{
+        transform:
+            translate(3%, 2%)
+            scale(1.08);
+    }
+
+    100%{
+        transform:
+            translate(-2%, 4%)
+            scale(1.03);
     }
 }
 
-/* =========================
-   HEADER
-========================= */
+/* =========================================================
+   PARTICLES
+========================================================= */
 
-nav{
+.particles{
     position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    height:76px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 5vw;
-    z-index:100;
-    background:rgba(5,5,7,.42);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    border-bottom:1px solid rgba(255,255,255,.06);
+    inset:0;
+    pointer-events:none;
+    z-index:-2;
+    overflow:hidden;
 }
 
-.navLogo{
-    font-size:13px;
-    font-weight:800;
-    letter-spacing:.28em;
-    opacity:.85;
-}
-
-.navRight{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:10px;
-    letter-spacing:.2em;
-    text-transform:uppercase;
-    color:rgba(255,255,255,.45);
-}
-
-.statusDot{
-    width:6px;
-    height:6px;
+.particle{
+    position:absolute;
+    width:2px;
+    height:2px;
     border-radius:50%;
-    background:#fff;
-    box-shadow:0 0 14px rgba(255,255,255,.8);
-    animation:pulse 2s infinite;
+    background:rgba(255,255,255,.75);
+
+    box-shadow:
+        0 0 8px rgba(255,255,255,.7);
+
+    animation:
+        particleFloat linear infinite;
 }
 
-@keyframes pulse{
-    50%{opacity:.3;transform:scale(.7)}
+@keyframes particleFloat{
+
+    from{
+        transform:
+            translateY(110vh)
+            translateX(0);
+        opacity:0;
+    }
+
+    15%{
+        opacity:.8;
+    }
+
+    80%{
+        opacity:.45;
+    }
+
+    to{
+        transform:
+            translateY(-15vh)
+            translateX(40px);
+        opacity:0;
+    }
 }
 
-/* =========================
-   HERO
-========================= */
+/* =========================================================
+   CURSOR GLOW
+========================================================= */
 
-.hero{
+.cursor-glow{
+    position:fixed;
+    width:260px;
+    height:260px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    pointer-events:none;
+    z-index:9990;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(120,100,255,.12),
+            rgba(80,180,255,.05) 35%,
+            transparent 70%
+        );
+
+    filter:blur(10px);
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main{
+    width:100%;
     min-height:100vh;
     position:relative;
-    z-index:2;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:88vh;
+
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    text-align:center;
-    padding:120px 20px 80px;
+
+    padding:80px 20px 50px;
+
+    position:relative;
 }
 
-.eyebrow{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:28px;
-    font-size:10px;
-    letter-spacing:.38em;
+/* small top label */
+
+.hero-label{
+    position:relative;
+    z-index:10;
+
+    font-size:11px;
+    letter-spacing:7px;
     text-transform:uppercase;
-    color:rgba(255,255,255,.42);
-    animation:fadeUp 1.2s ease both;
+
+    color:rgba(255,255,255,.55);
+
+    margin-bottom:25px;
+
+    animation:
+        fadeDown 1.2s ease both;
 }
 
-.eyebrow::before,
-.eyebrow::after{
-    content:"";
-    width:34px;
-    height:1px;
-    background:rgba(255,255,255,.2);
-}
+@keyframes fadeDown{
 
-/* =========================
-   PREMIUM LENS TITLE
-========================= */
-
-.titleStage{
-    position:relative;
-    display:inline-block;
-    overflow:visible;
-}
-
-.title{
-    position:relative;
-    z-index:2;
-    font-size:clamp(54px,11vw,170px);
-    line-height:.88;
-    font-weight:900;
-    letter-spacing:-.075em;
-    white-space:nowrap;
-
-    background:linear-gradient(
-        180deg,
-        #ffffff 0%,
-        #e8e8eb 42%,
-        #8f8f98 100%
-    );
-
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-
-    filter:drop-shadow(0 18px 45px rgba(0,0,0,.35));
-
-    animation:titleIn 1.4s cubic-bezier(.16,1,.3,1) both;
-}
-
-@keyframes titleIn{
     from{
         opacity:0;
-        transform:translateY(35px) scale(.96);
-        filter:blur(12px);
+        transform:translateY(-20px);
     }
+
     to{
         opacity:1;
-        transform:translateY(0) scale(1);
-        filter:blur(0);
+        transform:translateY(0);
     }
 }
 
-/* lens */
+/* =========================================================
+   PORTFOLIO TITLE
+========================================================= */
 
-.lens{
+.title-wrap{
+
+    --lens-x:50%;
+    --lens-y:30%;
+
+    position:relative;
+
+    width:min(700px,90vw);
+
+    height:390px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:visible;
+
+    isolation:isolate;
+}
+
+/* normal title */
+
+.title-normal{
+
     position:absolute;
-    z-index:5;
-    top:50%;
-    left:0;
+    inset:0;
 
-    width:clamp(115px,13vw,205px);
-    height:clamp(115px,13vw,205px);
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:2;
+
+    pointer-events:none;
+}
+
+/* IMPORTANT:
+   exact two words with small gap */
+
+.word{
+
+    display:block;
+
+    font-size:
+        clamp(72px, 15vw, 175px);
+
+    line-height:.82;
+
+    font-weight:900;
+
+    letter-spacing:
+        clamp(4px,1vw,12px);
+
+    text-transform:uppercase;
+
+    color:#fff;
+
+    text-align:center;
+
+    white-space:nowrap;
+
+    text-shadow:
+        0 0 30px rgba(255,255,255,.08);
+
+    animation:
+        titleFloat 5s ease-in-out infinite;
+}
+
+.word:first-child{
+    margin-bottom:20px;
+}
+
+.word:nth-child(2){
+    animation-delay:-2.5s;
+}
+
+@keyframes titleFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-4px);
+    }
+}
+
+/* =========================================================
+   REFRACTED TEXT
+========================================================= */
+
+.title-refract{
+
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:4;
+
+    pointer-events:none;
+
+    clip-path:
+        circle(
+            var(--lens-radius,90px)
+            at
+            var(--lens-x)
+            var(--lens-y)
+        );
+
+    filter:
+        blur(.7px)
+        saturate(1.35);
+
+    transform:
+        scale(1.055);
+
+    mix-blend-mode:screen;
+}
+
+.title-refract .word{
+
+    color:#fff;
+
+    text-shadow:
+        -3px 0 rgba(255,0,80,.65),
+         3px 0 rgba(0,210,255,.65),
+         0 0 18px rgba(255,255,255,.25);
+}
+
+/* =========================================================
+   GLASS LENS
+========================================================= */
+
+.glass-lens{
+
+    position:absolute;
+
+    width:
+        var(--lens-size,180px);
+
+    height:
+        var(--lens-size,180px);
+
+    left:
+        var(--lens-x);
+
+    top:
+        var(--lens-y);
+
+    transform:
+        translate(-50%,-50%);
 
     border-radius:50%;
-    transform:translate(-50%,-50%);
+
+    z-index:7;
 
     pointer-events:none;
 
     background:
         radial-gradient(
-            circle at 30% 24%,
-            rgba(255,255,255,.23),
-            rgba(255,255,255,.07) 20%,
-            rgba(255,255,255,.025) 50%,
-            rgba(255,255,255,.07) 100%
+            circle at 35% 25%,
+            rgba(255,255,255,.20),
+            rgba(255,255,255,.07) 28%,
+            rgba(100,180,255,.045) 52%,
+            rgba(255,255,255,.02) 70%,
+            transparent 75%
         );
 
-    border:1px solid rgba(255,255,255,.48);
+    border:
+        1px solid rgba(255,255,255,.55);
 
     box-shadow:
-        inset 0 0 22px rgba(255,255,255,.08),
-        inset 0 0 55px rgba(140,160,255,.07),
-        0 0 22px rgba(255,255,255,.07),
-        0 0 70px rgba(120,130,255,.055);
+        inset 0 0 25px rgba(255,255,255,.08),
+        inset 0 0 60px rgba(80,180,255,.08),
+        0 0 20px rgba(130,170,255,.12);
 
-    backdrop-filter:blur(2px);
-    -webkit-backdrop-filter:blur(2px);
+    backdrop-filter:
+        blur(2px);
 
-    animation:lensMove 8s cubic-bezier(.45,0,.55,1) infinite alternate;
+    -webkit-backdrop-filter:
+        blur(2px);
+
+    overflow:hidden;
+
+    transition:
+        width .3s ease,
+        height .3s ease;
 }
 
-/* moving highlight on glass */
+/* glass reflection */
 
-.lens::before{
+.glass-lens::before{
+
     content:"";
+
     position:absolute;
-    width:38%;
-    height:13%;
-    left:20%;
+
+    width:55%;
+    height:25%;
+
     top:13%;
+    left:18%;
+
     border-radius:50%;
-    transform:rotate(-25deg);
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.42),
-        transparent
-    );
-    filter:blur(3px);
-    opacity:.55;
-}
-
-.lens::after{
-    content:"";
-    position:absolute;
-    inset:5px;
-    border-radius:50%;
-    border:1px solid rgba(255,255,255,.11);
-    box-shadow:
-        inset 8px 8px 20px rgba(255,255,255,.04),
-        inset -8px -8px 20px rgba(0,0,0,.12);
-}
-
-@keyframes lensMove{
-    0%{
-        left:3%;
-        transform:translate(-50%,-50%) scale(1);
-    }
-
-    50%{
-        left:50%;
-        transform:translate(-50%,-50%) scale(1.025);
-    }
-
-    100%{
-        left:97%;
-        transform:translate(-50%,-50%) scale(1);
-    }
-}
-
-/*
-  Refraction layer:
-  A duplicated PORTFOLIO text sits above the original and
-  is clipped to the lens circle.
-*/
-
-.refractedText{
-    position:absolute;
-    z-index:7;
-    inset:0;
-
-    font-size:clamp(54px,11vw,170px);
-    line-height:.88;
-    font-weight:900;
-    letter-spacing:-.075em;
-    white-space:nowrap;
 
     background:
         linear-gradient(
-            180deg,
-            #fff,
-            #dcdce5 45%,
-            #858593
+            120deg,
+            rgba(255,255,255,.35),
+            transparent
         );
 
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+    filter:blur(4px);
 
-    transform:scale(1.035);
-    filter:
-        blur(.65px)
-        drop-shadow(2px 0 rgba(255,70,100,.55))
-        drop-shadow(-2px 0 rgba(50,180,255,.55));
+    transform:rotate(-25deg);
 
-    clip-path:circle(
-        clamp(57px,6.5vw,102px)
-        at var(--lensX) 50%
-    );
-
-    pointer-events:none;
+    opacity:.65;
 }
 
-.heroDescription{
-    max-width:600px;
-    margin:34px auto 0;
-    color:rgba(255,255,255,.47);
-    font-size:14px;
-    line-height:1.9;
-    animation:fadeUp 1.2s .35s ease both;
-}
+/* RGB edge */
 
-.scrollHint{
+.glass-lens::after{
+
+    content:"";
+
     position:absolute;
-    bottom:34px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:12px;
-    color:rgba(255,255,255,.3);
-    font-size:9px;
-    letter-spacing:.3em;
+    inset:0;
+
+    border-radius:50%;
+
+    background:
+        conic-gradient(
+            from 0deg,
+            rgba(255,0,90,.14),
+            rgba(0,220,255,.14),
+            rgba(150,80,255,.14),
+            rgba(255,0,90,.14)
+        );
+
+    mix-blend-mode:screen;
+
+    opacity:.6;
+
+    animation:
+        lensRGB 5s linear infinite;
+}
+
+@keyframes lensRGB{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* =========================================================
+   SUBTITLE
+========================================================= */
+
+.hero-subtitle{
+
+    margin-top:10px;
+
+    text-align:center;
+
+    color:rgba(255,255,255,.48);
+
+    font-size:
+        clamp(11px,1.5vw,14px);
+
+    letter-spacing:
+        clamp(3px,1vw,7px);
+
     text-transform:uppercase;
-}
 
-.scrollLine{
-    width:1px;
-    height:48px;
-    background:linear-gradient(
-        to bottom,
-        rgba(255,255,255,.5),
-        transparent
-    );
-    animation:scrollLine 2s ease-in-out infinite;
-}
-
-@keyframes scrollLine{
-    50%{transform:scaleY(.45);opacity:.3}
+    animation:
+        fadeUp 1.4s ease .3s both;
 }
 
 @keyframes fadeUp{
+
     from{
         opacity:0;
         transform:translateY(20px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
-/* =========================
-   PORTFOLIO SECTION
-========================= */
+/* =========================================================
+   CATEGORY AREA
+========================================================= */
 
-.portfolioSection{
-    position:relative;
-    z-index:3;
-    padding:90px 5vw 130px;
+.portfolio-section{
+
+    width:min(1250px,92%);
+
+    margin:
+        0 auto;
+
+    padding:
+        20px 0 100px;
 }
 
-.sectionHead{
-    max-width:1200px;
-    margin:0 auto 42px;
+.section-heading{
+
     display:flex;
+    align-items:center;
     justify-content:space-between;
-    align-items:flex-end;
+
+    margin-bottom:35px;
 }
 
-.sectionLabel{
-    font-size:10px;
-    letter-spacing:.32em;
+.section-heading h2{
+
+    font-size:12px;
+
+    letter-spacing:5px;
+
+    color:rgba(255,255,255,.55);
+
     text-transform:uppercase;
-    color:rgba(255,255,255,.36);
-    margin-bottom:14px;
 }
 
-.sectionTitle{
-    font-size:clamp(30px,5vw,62px);
-    letter-spacing:-.055em;
-    font-weight:800;
-}
+.section-line{
 
-.sectionCount{
-    color:rgba(255,255,255,.28);
-    font-size:11px;
-    letter-spacing:.15em;
-}
+    height:1px;
 
-/* =========================
-   CATEGORY GRID
-========================= */
+    flex:1;
 
-.categories{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.category{
-    position:relative;
-    min-height:330px;
-    padding:1px;
-    border-radius:26px;
-    overflow:hidden;
-    cursor:pointer;
+    margin-left:25px;
 
     background:
         linear-gradient(
-            135deg,
-            rgba(255,255,255,.22),
-            rgba(255,255,255,.035) 35%,
-            rgba(255,255,255,.025) 70%,
-            rgba(255,255,255,.13)
+            90deg,
+            rgba(255,255,255,.18),
+            transparent
         );
+}
+
+/* =========================================================
+   CATEGORY GRID
+========================================================= */
+
+.folder-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:35px;
+
+    perspective:1400px;
+}
+
+/* =========================================================
+   FOLDER CARD
+========================================================= */
+
+.folder-card{
+
+    height:300px;
+
+    position:relative;
+
+    cursor:pointer;
+
+    perspective:1000px;
+
+    animation:
+        cardAppear .8s ease both;
+
+    transform-style:preserve-3d;
 
     transition:
-        transform .65s cubic-bezier(.16,1,.3,1),
-        box-shadow .65s ease;
-
-    animation:cardReveal .9s both;
+        transform .35s cubic-bezier(.2,.8,.2,1);
 }
 
-.category:nth-child(1){animation-delay:.05s}
-.category:nth-child(2){animation-delay:.12s}
-.category:nth-child(3){animation-delay:.19s}
-.category:nth-child(4){animation-delay:.26s}
-.category:nth-child(5){animation-delay:.33s}
-.category:nth-child(6){animation-delay:.40s}
+.folder-card:nth-child(2){
+    animation-delay:.08s;
+}
 
-@keyframes cardReveal{
+.folder-card:nth-child(3){
+    animation-delay:.16s;
+}
+
+.folder-card:nth-child(4){
+    animation-delay:.24s;
+}
+
+.folder-card:nth-child(5){
+    animation-delay:.32s;
+}
+
+.folder-card:nth-child(6){
+    animation-delay:.40s;
+}
+
+@keyframes cardAppear{
+
     from{
         opacity:0;
-        transform:translateY(35px) scale(.97);
+        transform:
+            translateY(40px)
+            rotateX(8deg);
     }
+
     to{
         opacity:1;
-        transform:translateY(0) scale(1);
+        transform:
+            translateY(0)
+            rotateX(0);
     }
 }
 
-.category:hover{
-    transform:translateY(-9px);
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.42),
-        0 0 35px rgba(255,255,255,.045);
-}
+/* =========================================================
+   FOLDER BODY
+========================================================= */
 
-.category::before{
-    content:"";
+.folder-body{
+
     position:absolute;
-    width:160px;
-    height:160px;
-    right:-70px;
-    top:-70px;
-    border-radius:50%;
-    background:rgba(255,255,255,.07);
-    filter:blur(25px);
-    transition:.7s;
-}
 
-.category:hover::before{
-    transform:scale(2);
-    opacity:.6;
-}
+    inset:
+        15px 0 0;
 
-.cardInner{
-    position:relative;
-    height:100%;
-    min-height:328px;
-    border-radius:25px;
-    overflow:hidden;
+    border-radius:
+        20px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(25,25,31,.92),
-            rgba(10,10,13,.88)
+            rgba(255,255,255,.105),
+            rgba(255,255,255,.035)
         );
 
-    backdrop-filter:blur(18px);
-}
+    border:
+        1px solid rgba(255,255,255,.14);
 
-.cardVisual{
-    position:absolute;
-    inset:0;
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.38),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    transform:
+        translateZ(20px);
+
+    transform-style:preserve-3d;
+
     overflow:hidden;
+
+    transition:
+        .45s cubic-bezier(.2,.8,.2,1);
 }
 
-.cardVisual::after{
-    content:"";
+/* =========================================================
+   FOLDER TAB
+========================================================= */
+
+.folder-tab{
+
     position:absolute;
-    inset:0;
+
+    top:-2px;
+    left:18px;
+
+    width:115px;
+    height:30px;
+
+    border-radius:
+        12px 12px 0 0;
+
     background:
         linear-gradient(
-            to bottom,
-            transparent 25%,
-            rgba(5,5,7,.18) 50%,
-            rgba(5,5,7,.96) 100%
+            135deg,
+            rgba(255,255,255,.16),
+            rgba(255,255,255,.055)
         );
+
+    border:
+        1px solid rgba(255,255,255,.14);
+
+    border-bottom:none;
+
+    transform:
+        translateZ(32px);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.1);
+
+    z-index:5;
 }
 
-.cardVisual img{
+/* =========================================================
+   IMAGE PREVIEW
+========================================================= */
+
+.folder-preview{
+
+    position:absolute;
+
+    top:42px;
+    left:18px;
+    right:18px;
+    bottom:62px;
+
+    border-radius:
+        13px;
+
+    overflow:hidden;
+
+    background:
+        rgba(0,0,0,.08);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    transform:
+        translateZ(38px);
+
+    transition:
+        transform .45s ease;
+}
+
+.folder-preview img{
+
     width:100%;
     height:100%;
-    object-fit:cover;
-    opacity:.34;
-    filter:grayscale(.15) saturate(.75);
-    transform:scale(1.03);
-    transition:
-        transform 1s cubic-bezier(.16,1,.3,1),
-        opacity .8s ease,
-        filter .8s ease;
-}
 
-.category:hover .cardVisual img{
-    transform:scale(1.11);
-    opacity:.55;
-    filter:grayscale(0) saturate(1);
-}
-
-.cardTop{
-    position:absolute;
-    z-index:3;
-    top:22px;
-    left:22px;
-    right:22px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.number{
-    font-size:10px;
-    color:rgba(255,255,255,.4);
-    letter-spacing:.18em;
-}
-
-.arrow{
-    width:36px;
-    height:36px;
-    display:grid;
-    place-items:center;
-    border:1px solid rgba(255,255,255,.13);
-    border-radius:50%;
-    color:rgba(255,255,255,.55);
-    transition:.5s;
-}
-
-.category:hover .arrow{
-    background:rgba(255,255,255,.1);
-    color:#fff;
-    transform:rotate(45deg);
-}
-
-.cardContent{
-    position:absolute;
-    z-index:4;
-    left:24px;
-    right:24px;
-    bottom:23px;
-}
-
-.icon{
-    font-size:21px;
-    margin-bottom:15px;
-    opacity:.75;
-}
-
-.cardTitle{
-    font-size:25px;
-    font-weight:700;
-    letter-spacing:-.04em;
-    margin-bottom:8px;
-}
-
-.cardDescription{
-    color:rgba(255,255,255,.4);
-    font-size:11px;
-    line-height:1.6;
-    max-width:260px;
-}
-
-.cardShine{
-    position:absolute;
-    z-index:6;
-    width:80px;
-    height:180%;
-    top:-40%;
-    left:-100px;
-    transform:rotate(18deg);
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.11),
-        transparent
-    );
-    filter:blur(5px);
-    transition:1s;
-}
-
-.category:hover .cardShine{
-    left:110%;
-}
-
-/* =========================
-   GALLERY
-========================= */
-
-.galleryPage{
-    position:relative;
-    z-index:10;
-    min-height:100vh;
-    padding:110px 5vw 100px;
-    display:none;
-}
-
-.galleryPage.active{
     display:block;
-    animation:pageIn .7s cubic-bezier(.16,1,.3,1);
+
+    object-fit:cover;
+
+    opacity:1 !important;
+
+    filter:none !important;
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+    pointer-events:none;
+
+    transition:
+        transform .6s cubic-bezier(.2,.8,.2,1);
 }
 
-@keyframes pageIn{
+/* =========================================================
+   FOLDER BOTTOM
+========================================================= */
+
+.folder-bottom{
+
+    position:absolute;
+
+    left:20px;
+    right:20px;
+    bottom:19px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    transform:
+        translateZ(45px);
+
+    z-index:5;
+}
+
+.folder-name{
+
+    font-size:15px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    color:#fff;
+
+    transition:
+        letter-spacing .4s ease,
+        transform .4s ease;
+}
+
+.folder-arrow{
+
+    width:30px;
+    height:30px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    border:
+        1px solid rgba(255,255,255,.16);
+
+    color:rgba(255,255,255,.75);
+
+    transition:
+        .4s ease;
+}
+
+/* =========================================================
+   SHINE
+========================================================= */
+
+.folder-shine{
+
+    position:absolute;
+
+    inset:-100%;
+
+    z-index:10;
+
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 40%,
+            rgba(255,255,255,.13) 50%,
+            transparent 60%
+        );
+
+    transform:
+        translateX(-60%)
+        rotate(8deg);
+
+    transition:
+        transform .8s ease;
+}
+
+/* =========================================================
+   HOVER FOLDER
+========================================================= */
+
+.folder-card:hover .folder-body{
+
+    transform:
+        translateZ(40px)
+        rotateX(3deg)
+        rotateY(-3deg)
+        translateY(-8px);
+
+    border-color:
+        rgba(255,255,255,.25);
+
+    box-shadow:
+        0 35px 80px rgba(0,0,0,.5),
+        0 0 35px rgba(120,120,255,.08),
+        inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.folder-card:hover .folder-preview img{
+
+    transform:
+        scale(1.045);
+}
+
+.folder-card:hover .folder-shine{
+
+    transform:
+        translateX(60%)
+        rotate(8deg);
+}
+
+.folder-card:hover .folder-name{
+
+    letter-spacing:1.5px;
+
+    transform:
+        translateX(3px);
+}
+
+.folder-card:hover .folder-arrow{
+
+    transform:
+        translateX(4px)
+        rotate(-45deg);
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+/* =========================================================
+   CATEGORY VIEW
+========================================================= */
+
+.category-view{
+
+    display:none;
+
+    min-height:100vh;
+
+    padding:
+        70px 5% 100px;
+
+    animation:
+        viewIn .5s ease both;
+}
+
+.category-view.active{
+    display:block;
+}
+
+@keyframes viewIn{
+
     from{
         opacity:0;
-        transform:translateY(25px);
+        transform:translateY(20px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
-.backBtn{
-    display:inline-flex;
+/* category header */
+
+.category-header{
+
+    max-width:1300px;
+
+    margin:
+        0 auto 45px;
+
+    display:flex;
+
     align-items:center;
-    gap:10px;
-    margin-bottom:45px;
-    padding:12px 18px;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:100px;
-    background:rgba(255,255,255,.035);
-    color:rgba(255,255,255,.7);
-    cursor:pointer;
-    font-size:10px;
-    letter-spacing:.16em;
-    text-transform:uppercase;
-    transition:.4s;
+
+    justify-content:space-between;
+
+    gap:25px;
 }
 
-.backBtn:hover{
-    background:rgba(255,255,255,.09);
-    color:#fff;
-    transform:translateX(-4px);
-}
+.category-title{
 
-.galleryHeader{
-    max-width:1200px;
-    margin:0 auto 45px;
-}
+    font-size:
+        clamp(32px,6vw,72px);
 
-.galleryTitle{
-    font-size:clamp(45px,8vw,100px);
-    letter-spacing:-.07em;
     font-weight:900;
+
+    letter-spacing:-2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #aeb7ff,
+            #fff
+        );
+
+    background-size:200% auto;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    animation:
+        titleGradient 5s linear infinite;
 }
 
-.galleryDesc{
-    color:rgba(255,255,255,.4);
-    font-size:13px;
-    margin-top:12px;
+@keyframes titleGradient{
+
+    from{
+        background-position:0% center;
+    }
+
+    to{
+        background-position:200% center;
+    }
 }
 
-.galleryGrid{
-    max-width:1200px;
-    margin:auto;
-    columns:3 280px;
-    column-gap:18px;
-}
+/* back button */
 
-.galleryItem{
-    position:relative;
-    display:block;
-    width:100%;
-    margin-bottom:18px;
-    overflow:hidden;
-    border-radius:18px;
-    border:1px solid rgba(255,255,255,.07);
-    background:#0c0c10;
-    cursor:pointer;
-    break-inside:avoid;
-    transform:translateZ(0);
-}
+.back-button{
 
-.galleryItem::after{
-    content:"VIEW";
-    position:absolute;
-    inset:0;
-    display:grid;
-    place-items:center;
-    font-size:9px;
-    letter-spacing:.3em;
+    flex-shrink:0;
+
+    border:
+        1px solid rgba(255,255,255,.18);
+
+    background:
+        rgba(255,255,255,.055);
+
     color:#fff;
-    background:rgba(0,0,0,.35);
-    opacity:0;
-    transition:.45s;
+
+    padding:
+        12px 20px;
+
+    border-radius:
+        999px;
+
+    cursor:pointer;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    transition:
+        .35s ease;
 }
 
-.galleryItem:hover::after{
-    opacity:1;
+.back-button:hover{
+
+    background:
+        rgba(255,255,255,.12);
+
+    border-color:
+        rgba(255,255,255,.35);
+
+    transform:
+        translateX(-4px);
 }
 
-.galleryItem img{
-    display:block;
+/* =========================================================
+   IMAGE GALLERY
+========================================================= */
+
+.gallery{
+
+    max-width:1300px;
+
+    margin:0 auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.gallery-item{
+
+    position:relative;
+
+    min-height:260px;
+
+    border-radius:
+        16px;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    animation:
+        galleryAppear .7s ease both;
+
+    transition:
+        transform .4s ease,
+        border-color .4s ease,
+        box-shadow .4s ease;
+}
+
+@keyframes galleryAppear{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(25px)
+            scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+.gallery-item:hover{
+
+    transform:
+        translateY(-7px);
+
+    border-color:
+        rgba(255,255,255,.27);
+
+    box-shadow:
+        0 25px 55px rgba(0,0,0,.4);
+}
+
+.gallery-item img{
+
     width:100%;
-    height:auto;
+    height:100%;
+
+    min-height:260px;
+
+    object-fit:contain;
+
+    display:block;
+
+    background:
+        rgba(0,0,0,.08);
+
+    filter:none !important;
+
+    opacity:1 !important;
+
+    transition:
+        transform .5s ease;
+}
+
+.gallery-item:hover img{
+
+    transform:
+        scale(1.025);
+}
+
+/* image shine */
+
+.gallery-item::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
     pointer-events:none;
-    -webkit-user-drag:none;
-    transition:transform .8s cubic-bezier(.16,1,.3,1);
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 35%,
+            rgba(255,255,255,.09) 50%,
+            transparent 65%
+        );
+
+    transform:
+        translateX(-120%);
+
+    transition:
+        transform .7s ease;
 }
 
-.galleryItem:hover img{
-    transform:scale(1.035);
+.gallery-item:hover::after{
+
+    transform:
+        translateX(120%);
 }
 
-/* =========================
+/* =========================================================
    LIGHTBOX
-========================= */
+========================================================= */
 
 .lightbox{
+
     position:fixed;
+
     inset:0;
-    z-index:500;
+
+    z-index:10000;
+
     display:none;
+
     align-items:center;
     justify-content:center;
+
     padding:30px;
-    background:rgba(2,2,4,.9);
-    backdrop-filter:blur(25px);
+
+    background:
+        rgba(3,3,8,.92);
+
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
 }
 
 .lightbox.active{
     display:flex;
-    animation:lightIn .35s ease;
-}
-
-@keyframes lightIn{
-    from{opacity:0}
-    to{opacity:1}
 }
 
 .lightbox img{
-    max-width:94vw;
-    max-height:88vh;
+
+    max-width:
+        94vw;
+
+    max-height:
+        88vh;
+
     object-fit:contain;
-    border-radius:10px;
-    box-shadow:0 30px 100px rgba(0,0,0,.7);
-    pointer-events:none;
+
+    border-radius:
+        10px;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.7),
+        0 0 40px rgba(120,130,255,.08);
+
+    user-select:none;
+
     -webkit-user-drag:none;
-    animation:imageIn .5s cubic-bezier(.16,1,.3,1);
+
+    pointer-events:none;
+
+    animation:
+        lightboxIn .35s ease both;
 }
 
-@keyframes imageIn{
+@keyframes lightboxIn{
+
     from{
         opacity:0;
-        transform:scale(.94);
-        filter:blur(10px);
+        transform:
+            scale(.94);
     }
+
     to{
         opacity:1;
-        transform:scale(1);
-        filter:blur(0);
+        transform:
+            scale(1);
     }
 }
 
-.closeLightbox{
+.lightbox-close{
+
     position:absolute;
+
     top:25px;
     right:30px;
-    width:44px;
-    height:44px;
+
+    width:45px;
+    height:45px;
+
     border-radius:50%;
-    border:1px solid rgba(255,255,255,.13);
-    background:rgba(255,255,255,.05);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.16);
+
     color:#fff;
-    font-size:20px;
+
+    font-size:22px;
+
     cursor:pointer;
+
+    transition:
+        .3s ease;
 }
 
-/* =========================
+.lightbox-close:hover{
+
+    background:
+        rgba(255,255,255,.15);
+
+    transform:
+        rotate(90deg);
+}
+
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 footer{
-    position:relative;
-    z-index:3;
-    padding:35px 5vw;
-    border-top:1px solid rgba(255,255,255,.06);
-    display:flex;
-    justify-content:space-between;
-    color:rgba(255,255,255,.25);
-    font-size:9px;
-    letter-spacing:.18em;
+
+    text-align:center;
+
+    padding:
+        20px 20px 45px;
+
+    color:
+        rgba(255,255,255,.25);
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
     text-transform:uppercase;
 }
 
-/* =========================
+/* =========================================================
+   PROTECTION OVERLAY
+========================================================= */
+
+.protection-layer{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:9998;
+
+    pointer-events:none;
+
+    background:
+        transparent;
+}
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
-@media(max-width:850px){
+@media(max-width:900px){
 
-    nav{
-        padding:0 20px;
+    .folder-grid{
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
-    .navRight{
-        display:none;
+    .gallery{
+        grid-template-columns:
+            repeat(2,1fr);
     }
+
+    .title-wrap{
+        height:310px;
+    }
+
+    .glass-lens{
+        --lens-size:130px;
+    }
+
+}
+
+@media(max-width:600px){
 
     .hero{
-        min-height:88vh;
-        padding-top:110px;
+        min-height:78vh;
+        padding-top:55px;
     }
 
-    .title{
-        font-size:clamp(45px,15vw,90px);
+    .hero-label{
+        letter-spacing:4px;
+        margin-bottom:15px;
     }
 
-    .refractedText{
-        font-size:clamp(45px,15vw,90px);
+    .title-wrap{
+        width:96vw;
+        height:245px;
     }
 
-    .categories{
+    .word{
+        font-size:
+            clamp(58px,19vw,100px);
+
+        letter-spacing:3px;
+    }
+
+    .word:first-child{
+        margin-bottom:12px;
+    }
+
+    .glass-lens{
+        --lens-size:100px;
+    }
+
+    .hero-subtitle{
+        font-size:9px;
+        letter-spacing:3px;
+    }
+
+    .folder-grid{
+        grid-template-columns:1fr;
+        gap:25px;
+    }
+
+    .folder-card{
+        height:280px;
+    }
+
+    .gallery{
         grid-template-columns:1fr;
     }
 
-    .category{
-        min-height:300px;
-    }
-
-    .cardInner{
-        min-height:298px;
-    }
-
-    .sectionHead{
-        display:block;
-    }
-
-    .sectionCount{
-        margin-top:15px;
-    }
-
-    footer{
+    .category-header{
+        align-items:flex-start;
         flex-direction:column;
-        gap:12px;
     }
+
+    .back-button{
+        order:-1;
+    }
+
+    .category-title{
+        font-size:42px;
+    }
+
+    .category-view{
+        padding-top:35px;
+    }
+
 }
 
-@media(max-width:500px){
-
-    .heroDescription{
-        font-size:12px;
-        max-width:330px;
-    }
-
-    .portfolioSection{
-        padding-left:18px;
-        padding-right:18px;
-    }
-
-    .galleryPage{
-        padding-left:18px;
-        padding-right:18px;
-    }
-
-    .galleryGrid{
-        columns:1;
-    }
-
-    .lens{
-        width:100px;
-        height:100px;
-    }
-}
 </style>
 </head>
 
+
 <body>
 
-<canvas id="particles"></canvas>
+<!-- ======================================================
+     BACKGROUND
+====================================================== -->
 
-<div class="cursorGlow" id="cursorGlow"></div>
+<div class="aurora"></div>
 
-<div class="aurora">
-    <div class="blob one"></div>
-    <div class="blob two"></div>
-    <div class="blob three"></div>
-</div>
+<div class="particles" id="particles"></div>
 
-<nav>
-    <div class="navLogo">CREATIVE / STUDIO</div>
+<div class="cursor-glow" id="cursorGlow"></div>
 
-    <div class="navRight">
-        <span class="statusDot"></span>
-        AVAILABLE FOR WORK
-    </div>
-</nav>
+<div class="protection-layer"></div>
 
-<!-- =========================
-     HOME
-========================= -->
 
-<main id="home">
+<!-- ======================================================
+     MAIN PORTFOLIO HOME
+====================================================== -->
+
+<main id="homePage">
 
 <section class="hero">
 
-    <div class="eyebrow">
-        DIGITAL ART & DESIGN
+    <div class="hero-label">
+        Creative Visual Portfolio
     </div>
 
-    <div class="titleStage" id="titleStage">
 
-        <div class="title">
-            PORTFOLIO
+    <!-- ==================================================
+         PORT / FOLIO TITLE
+    ================================================== -->
+
+    <div
+        class="title-wrap"
+        id="titleWrap"
+    >
+
+        <!-- normal sharp typography -->
+
+        <div class="title-normal">
+
+            <span class="word">
+                PORT
+            </span>
+
+            <span class="word">
+                FOLIO
+            </span>
+
         </div>
 
-        <div class="refractedText" id="refractedText">
-            PORTFOLIO
+
+        <!-- refracted copy -->
+
+        <div
+            class="title-refract"
+            aria-hidden="true"
+        >
+
+            <span class="word">
+                PORT
+            </span>
+
+            <span class="word">
+                FOLIO
+            </span>
+
         </div>
 
-        <div class="lens" id="lens"></div>
+
+        <!-- moving glass lens -->
+
+        <div
+            class="glass-lens"
+            aria-hidden="true"
+        ></div>
 
     </div>
 
-    <p class="heroDescription">
-        A curated collection of VTuber models, visual identities,
-        banners, emotes, overlays and creative artwork.
-    </p>
 
-    <div class="scrollHint">
-        EXPLORE
-        <span class="scrollLine"></span>
+    <div class="hero-subtitle">
+        VTuber • Branding • Illustration • Visual Design
     </div>
 
 </section>
 
 
-<section class="portfolioSection">
+<!-- ======================================================
+     CATEGORY SECTION
+====================================================== -->
 
-    <div class="sectionHead">
+<section class="portfolio-section">
 
-        <div>
-            <div class="sectionLabel">
-                Selected Work
+    <div class="section-heading">
+
+        <h2>
+            Selected Works
+        </h2>
+
+        <div class="section-line"></div>
+
+    </div>
+
+
+    <div
+        class="folder-grid"
+        id="folderGrid"
+    >
+
+        <!-- ==============================================
+             VTUBER MODEL
+        =============================================== -->
+
+        <div
+            class="folder-card"
+            data-category="VTuber Model"
+        >
+
+            <div class="folder-body">
+
+                <div class="folder-tab"></div>
+
+                <div class="folder-preview">
+
+                    <img
+                        src="Png%20model%201.jpeg"
+                        alt="VTuber Model"
+                        draggable="false"
+                    >
+
+                </div>
+
+                <div class="folder-shine"></div>
+
+                <div class="folder-bottom">
+
+                    <div class="folder-name">
+                        VTuber Model
+                    </div>
+
+                    <div class="folder-arrow">
+                        →
+                    </div>
+
+                </div>
+
             </div>
 
-            <h2 class="sectionTitle">
-                Explore the collection.
-            </h2>
         </div>
 
-        <div class="sectionCount">
-            06 CATEGORIES
+
+        <!-- ==============================================
+             LOGO
+        =============================================== -->
+
+        <div
+            class="folder-card"
+            data-category="Logo"
+        >
+
+            <div class="folder-body">
+
+                <div class="folder-tab"></div>
+
+                <div class="folder-preview">
+
+                    <img
+                        src="logo%201.jpeg"
+                        alt="Logo"
+                        draggable="false"
+                    >
+
+                </div>
+
+                <div class="folder-shine"></div>
+
+                <div class="folder-bottom">
+
+                    <div class="folder-name">
+                        Logo
+                    </div>
+
+                    <div class="folder-arrow">
+                        →
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==============================================
+             BANNER
+        =============================================== -->
+
+        <div
+            class="folder-card"
+            data-category="Banner"
+        >
+
+            <div class="folder-body">
+
+                <div class="folder-tab"></div>
+
+                <div class="folder-preview">
+
+                    <img
+                        src="Banner1.jpeg"
+                        alt="Banner"
+                        draggable="false"
+                    >
+
+                </div>
+
+                <div class="folder-shine"></div>
+
+                <div class="folder-bottom">
+
+                    <div class="folder-name">
+                        Banner
+                    </div>
+
+                    <div class="folder-arrow">
+                        →
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==============================================
+             EMOTES
+        =============================================== -->
+
+        <div
+            class="folder-card"
+            data-category="Emotes"
+        >
+
+            <div class="folder-body">
+
+                <div class="folder-tab"></div>
+
+                <div class="folder-preview">
+
+                    <img
+                        src="Emotes%201.jpeg"
+                        alt="Emotes"
+                        draggable="false"
+                    >
+
+                </div>
+
+                <div class="folder-shine"></div>
+
+                <div class="folder-bottom">
+
+                    <div class="folder-name">
+                        Emotes
+                    </div>
+
+                    <div class="folder-arrow">
+                        →
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==============================================
+             ARTSCENE
+        =============================================== -->
+
+        <div
+            class="folder-card"
+            data-category="Artscene"
+        >
+
+            <div class="folder-body">
+
+                <div class="folder-tab"></div>
+
+                <div class="folder-preview">
+
+                    <img
+                        src="Artscene%201.jpeg"
+                        alt="Artscene"
+                        draggable="false"
+                    >
+
+                </div>
+
+                <div class="folder-shine"></div>
+
+                <div class="folder-bottom">
+
+                    <div class="folder-name">
+                        Artscene
+                    </div>
+
+                    <div class="folder-arrow">
+                        →
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==============================================
+             OVERLAY
+        =============================================== -->
+
+        <div
+            class="folder-card"
+            data-category="Overlay"
+        >
+
+            <div class="folder-body">
+
+                <div class="folder-tab"></div>
+
+                <div class="folder-preview">
+
+                    <img
+                        src="Overlay%201.jpeg"
+                        alt="Overlay"
+                        draggable="false"
+                    >
+
+                </div>
+
+                <div class="folder-shine"></div>
+
+                <div class="folder-bottom">
+
+                    <div class="folder-name">
+                        Overlay
+                    </div>
+
+                    <div class="folder-arrow">
+                        →
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
-
-
-    <div class="categories" id="categories"></div>
-
-</section>
-
-</main>
-
-
-<!-- =========================
-     GALLERY PAGE
-========================= -->
-
-<section class="galleryPage" id="galleryPage">
-
-    <button class="backBtn" id="backBtn">
-        ← &nbsp; BACK TO PORTFOLIO
-    </button>
-
-    <div class="galleryHeader">
-        <h1 class="galleryTitle" id="galleryTitle"></h1>
-        <p class="galleryDesc" id="galleryDesc"></p>
-    </div>
-
-    <div class="galleryGrid" id="galleryGrid"></div>
 
 </section>
 
 
 <footer>
-    <span>© 2026 CREATIVE STUDIO</span>
-    <span>DESIGNED WITH PRECISION</span>
+    © PORTFOLIO — Creative Visual Works
 </footer>
 
+</main>
 
-<!-- =========================
+
+<!-- ======================================================
+     CATEGORY PAGE
+====================================================== -->
+
+<section
+    class="category-view"
+    id="categoryView"
+>
+
+    <div class="category-header">
+
+        <div>
+
+            <div
+                class="category-title"
+                id="categoryTitle"
+            >
+                VTuber Model
+            </div>
+
+        </div>
+
+        <button
+            class="back-button"
+            id="backButton"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+
+    <div
+        class="gallery"
+        id="gallery"
+    ></div>
+
+</section>
+
+
+<!-- ======================================================
      LIGHTBOX
-========================= -->
+====================================================== -->
 
-<div class="lightbox" id="lightbox">
+<div
+    class="lightbox"
+    id="lightbox"
+>
 
-    <button class="closeLightbox" id="closeLightbox">
+    <button
+        class="lightbox-close"
+        id="lightboxClose"
+        aria-label="Close"
+    >
         ×
     </button>
 
-    <img id="lightboxImage" src="" alt="Portfolio Preview">
+    <img
+        id="lightboxImage"
+        src=""
+        alt=""
+        draggable="false"
+    >
 
 </div>
 
 
 <script>
 
-/* ==========================================
-   PORTFOLIO DATA
-   ALL FILES ARE IN ROOT DIRECTORY
-========================================== */
+/* =========================================================
+   IMAGE DATA
+========================================================= */
 
-const portfolio = {
+const categories = {
 
-    vtuber:{
-        title:"VTuber Model",
-        description:"PNG VTuber models and character artwork.",
-        icon:"✦",
-        images:[
-            "Png model 1.jpeg",
-            "Png model 2.jpeg",
-            "Png model 3.jpeg",
-            "Png model 4.jpeg",
-            "Png model 5.jpeg",
-            "Png model 6.jpeg",
-            "Png model 7.jpeg",
-            "Png model 8.jpeg"
-        ]
-    },
+    "VTuber Model":[
 
-    logo:{
-        title:"Logo",
-        description:"Custom logos and visual identity designs.",
-        icon:"◇",
-        images:[
-            "logo 1.jpeg",
-            "logo4.jpeg",
-            "logo5.jpeg",
-            "Logo2.jpeg",
-            "Logo3.jpeg"
-        ]
-    },
+        "Png model 1.jpeg",
+        "Png model 2.jpeg",
+        "Png model 3.jpeg",
+        "Png model 4.jpeg",
+        "Png model 5.jpeg",
+        "Png model 6.jpeg",
+        "Png model 7.jpeg",
+        "Png model 8.jpeg"
 
-    banner:{
-        title:"Banner",
-        description:"Professional banners for streamers and creators.",
-        icon:"▱",
-        images:[
-            "Banner1.jpeg",
-            "Banner3.jpeg",
-            "Banner7.jpeg",
-            "Banner6.jpeg",
-            "banner5.jpeg",
-            "banner4.jpeg",
-            "banner2.jpeg"
-        ]
-    },
+    ],
 
-    emotes:{
-        title:"Emotes",
-        description:"Custom expressive emotes for streaming communities.",
-        icon:"♡",
-        images:[
-            "Emotes 1.jpeg",
-            "Emotes 2.jpeg",
-            "Emotes 3.jpeg",
-            "Emotes 4.jpeg"
-        ]
-    },
+    "Logo":[
 
-    artscene:{
-        title:"Artscene",
-        description:"Creative artscene and visual artwork collection.",
-        icon:"✧",
-        images:[
-            "Artscene 1.jpeg"
-        ]
-    },
+        "logo 1.jpeg",
+        "logo4.jpeg",
+        "logo5.jpeg",
+        "Logo2.jpeg",
+        "Logo3.jpeg"
 
-    overlay:{
-        title:"Overlay",
-        description:"Custom stream overlays and creator graphics.",
-        icon:"⬡",
-        images:[
-            "Overlay 1.jpeg"
-        ]
-    }
+    ],
+
+    "Banner":[
+
+        "Banner1.jpeg",
+        "Banner3.jpeg",
+        "Banner7.jpeg",
+        "Banner6.jpeg",
+        "banner5.jpeg",
+        "banner4.jpeg",
+        "banner2.jpeg"
+
+    ],
+
+    "Emotes":[
+
+        "Emotes 1.jpeg",
+        "Emotes 2.jpeg",
+        "Emotes 3.jpeg",
+        "Emotes 4.jpeg"
+
+    ],
+
+    "Artscene":[
+
+        "Artscene 1.jpeg"
+
+    ],
+
+    "Overlay":[
+
+        "Overlay 1.jpeg"
+
+    ]
 
 };
 
 
-/* ==========================================
-   SAFE IMAGE PATH
-========================================== */
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
-function imagePath(filename){
-    return encodeURI(filename);
+const homePage =
+    document.getElementById("homePage");
+
+const categoryView =
+    document.getElementById("categoryView");
+
+const categoryTitle =
+    document.getElementById("categoryTitle");
+
+const gallery =
+    document.getElementById("gallery");
+
+const backButton =
+    document.getElementById("backButton");
+
+const lightbox =
+    document.getElementById("lightbox");
+
+const lightboxImage =
+    document.getElementById("lightboxImage");
+
+const lightboxClose =
+    document.getElementById("lightboxClose");
+
+const titleWrap =
+    document.getElementById("titleWrap");
+
+const words =
+    [...document.querySelectorAll(
+        ".title-normal .word"
+    )];
+
+
+/* =========================================================
+   IMAGE PATH
+========================================================= */
+
+function imagePath(file){
+
+    return encodeURI(file);
+
 }
 
 
-/* ==========================================
-   CATEGORY CARDS
-========================================== */
+/* =========================================================
+   OPEN CATEGORY
+========================================================= */
 
-const categories =
-document.getElementById("categories");
+function openCategory(category){
 
-let cardIndex = 1;
+    homePage.style.display =
+        "none";
 
-Object.entries(portfolio).forEach(([key,item]) => {
+    categoryView.classList.add(
+        "active"
+    );
 
-    const card =
-    document.createElement("article");
+    categoryTitle.textContent =
+        category;
 
-    card.className="category";
+    gallery.innerHTML = "";
 
-    card.innerHTML=`
-
-        <div class="cardInner">
-
-            <div class="cardVisual">
-
-                <img
-                    src="${imagePath(item.images[0])}"
-                    alt=""
-                    draggable="false"
-                >
-
-            </div>
-
-            <div class="cardTop">
-
-                <span class="number">
-                    0${cardIndex}
-                </span>
-
-                <span class="arrow">
-                    ↗
-                </span>
-
-            </div>
-
-            <div class="cardContent">
-
-                <div class="icon">
-                    ${item.icon}
-                </div>
-
-                <div class="cardTitle">
-                    ${item.title}
-                </div>
-
-                <div class="cardDescription">
-                    ${item.description}
-                </div>
-
-            </div>
-
-            <div class="cardShine"></div>
-
-        </div>
-
-    `;
-
-    card.addEventListener("click",()=>{
-        openGallery(key);
-    });
-
-    categories.appendChild(card);
-
-    cardIndex++;
-});
+    const images =
+        categories[category] || [];
 
 
-/* ==========================================
-   GALLERY
-========================================== */
+    images.forEach(
+        (file,index)=>{
 
-const home =
-document.getElementById("home");
+            const item =
+                document.createElement(
+                    "div"
+                );
 
-const galleryPage =
-document.getElementById("galleryPage");
+            item.className =
+                "gallery-item";
 
-const galleryTitle =
-document.getElementById("galleryTitle");
+            item.style.animationDelay =
+                `${index * 0.06}s`;
 
-const galleryDesc =
-document.getElementById("galleryDesc");
 
-const galleryGrid =
-document.getElementById("galleryGrid");
+            const img =
+                document.createElement(
+                    "img"
+                );
 
-function openGallery(category){
+            img.src =
+                imagePath(file);
 
-    const item =
-    portfolio[category];
+            img.alt =
+                category;
 
-    galleryTitle.textContent =
-    item.title;
+            img.draggable =
+                false;
 
-    galleryDesc.textContent =
-    item.description;
 
-    galleryGrid.innerHTML="";
+            item.appendChild(img);
 
-    item.images.forEach(filename=>{
+            gallery.appendChild(item);
 
-        const wrapper =
-        document.createElement("div");
 
-        wrapper.className="galleryItem";
+            /* open lightbox */
 
-        const img =
-        document.createElement("img");
+            item.addEventListener(
+                "click",
+                ()=>{
+                    openLightbox(
+                        imagePath(file)
+                    );
+                }
+            );
 
-        img.src=imagePath(filename);
-        img.alt=item.title;
-        img.draggable=false;
+        }
+    );
 
-        img.addEventListener("contextmenu",e=>{
-            e.preventDefault();
-        });
-
-        wrapper.appendChild(img);
-
-        wrapper.addEventListener("click",()=>{
-            openLightbox(img.src);
-        });
-
-        galleryGrid.appendChild(wrapper);
-
-    });
-
-    home.style.display="none";
-    galleryPage.classList.add("active");
 
     window.scrollTo({
         top:0,
         behavior:"instant"
     });
+
 }
 
 
-/* ==========================================
-   BACK BUTTON
-========================================== */
+/* =========================================================
+   BACK TO HOME
+========================================================= */
 
-document
-.getElementById("backBtn")
-.addEventListener("click",()=>{
+function goHome(){
 
-    galleryPage.classList.remove("active");
+    categoryView.classList.remove(
+        "active"
+    );
 
-    home.style.display="block";
+    homePage.style.display =
+        "block";
 
     window.scrollTo({
         top:0,
-        behavior:"smooth"
+        behavior:"instant"
     });
+
+}
+
+
+backButton.addEventListener(
+    "click",
+    goHome
+);
+
+
+/* =========================================================
+   FOLDER CLICK
+========================================================= */
+
+document
+.querySelectorAll(".folder-card")
+.forEach(card=>{
+
+    card.addEventListener(
+        "click",
+        ()=>{
+
+            const category =
+                card.dataset.category;
+
+            openCategory(category);
+
+        }
+    );
 
 });
 
 
-/* ==========================================
+/* =========================================================
    LIGHTBOX
-========================================== */
-
-const lightbox =
-document.getElementById("lightbox");
-
-const lightboxImage =
-document.getElementById("lightboxImage");
+========================================================= */
 
 function openLightbox(src){
 
-    lightboxImage.src=src;
+    lightboxImage.src =
+        src;
 
-    lightbox.classList.add("active");
+    lightbox.classList.add(
+        "active"
+    );
+
+    document.body.style.overflow =
+        "hidden";
 
 }
+
 
 function closeLightbox(){
 
-    lightbox.classList.remove("active");
-
-    setTimeout(()=>{
-        lightboxImage.src="";
-    },250);
-
-}
-
-document
-.getElementById("closeLightbox")
-.addEventListener("click",closeLightbox);
-
-lightbox.addEventListener("click",e=>{
-
-    if(e.target===lightbox){
-        closeLightbox();
-    }
-
-});
-
-document.addEventListener("keydown",e=>{
-
-    if(e.key==="Escape"){
-        closeLightbox();
-    }
-
-});
-
-
-/* ==========================================
-   LENS POSITION
-========================================== */
-
-const lens =
-document.getElementById("lens");
-
-const titleStage =
-document.getElementById("titleStage");
-
-const refractedText =
-document.getElementById("refractedText");
-
-function updateLens(){
-
-    const stageWidth =
-    titleStage.offsetWidth;
-
-    const lensRect =
-    lens.getBoundingClientRect();
-
-    const stageRect =
-    titleStage.getBoundingClientRect();
-
-    const center =
-    lensRect.left +
-    lensRect.width / 2 -
-    stageRect.left;
-
-    const percentage =
-    (center / stageWidth) * 100;
-
-    refractedText.style.setProperty(
-        "--lensX",
-        percentage + "%"
+    lightbox.classList.remove(
+        "active"
     );
 
-    requestAnimationFrame(updateLens);
+    lightboxImage.src =
+        "";
+
+    document.body.style.overflow =
+        "";
 
 }
 
-updateLens();
 
-
-/* ==========================================
-   MOUSE GLOW
-========================================== */
-
-const cursorGlow =
-document.getElementById("cursorGlow");
-
-let mouseX=0;
-let mouseY=0;
-
-let glowX=0;
-let glowY=0;
-
-window.addEventListener("mousemove",e=>{
-
-    mouseX=e.clientX;
-    mouseY=e.clientY;
-
-});
-
-function animateGlow(){
-
-    glowX +=
-    (mouseX-glowX)*.08;
-
-    glowY +=
-    (mouseY-glowY)*.08;
-
-    cursorGlow.style.left=
-    glowX+"px";
-
-    cursorGlow.style.top=
-    glowY+"px";
-
-    requestAnimationFrame(animateGlow);
-
-}
-
-animateGlow();
-
-
-/* ==========================================
-   PARTICLE SYSTEM
-========================================== */
-
-const canvas =
-document.getElementById("particles");
-
-const ctx =
-canvas.getContext("2d");
-
-let particles=[];
-
-let particleMouse={
-    x:null,
-    y:null
-};
-
-function resizeCanvas(){
-
-    canvas.width=
-    window.innerWidth;
-
-    canvas.height=
-    window.innerHeight;
-
-}
-
-resizeCanvas();
-
-window.addEventListener(
-"resize",
-resizeCanvas
+lightboxClose.addEventListener(
+    "click",
+    closeLightbox
 );
 
 
-for(let i=0;i<65;i++){
+lightbox.addEventListener(
+    "click",
+    event=>{
 
-    particles.push({
+        if(
+            event.target === lightbox
+        ){
 
-        x:Math.random()*window.innerWidth,
-
-        y:Math.random()*window.innerHeight,
-
-        size:Math.random()*1.6+.3,
-
-        speedX:(Math.random()-.5)*.22,
-
-        speedY:(Math.random()-.5)*.22,
-
-        opacity:Math.random()*.45+.08
-
-    });
-
-}
-
-
-window.addEventListener("mousemove",e=>{
-
-    particleMouse.x=e.clientX;
-    particleMouse.y=e.clientY;
-
-});
-
-
-function drawParticles(){
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    particles.forEach((p,i)=>{
-
-        p.x+=p.speedX;
-        p.y+=p.speedY;
-
-        if(p.x<0)p.x=canvas.width;
-        if(p.x>canvas.width)p.x=0;
-
-        if(p.y<0)p.y=canvas.height;
-        if(p.y>canvas.height)p.y=0;
-
-        ctx.beginPath();
-
-        ctx.arc(
-            p.x,
-            p.y,
-            p.size,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fillStyle=
-        `rgba(255,255,255,${p.opacity})`;
-
-        ctx.fill();
-
-
-        for(let j=i+1;j<particles.length;j++){
-
-            const q=particles[j];
-
-            const dx=p.x-q.x;
-            const dy=p.y-q.y;
-
-            const distance=
-            Math.sqrt(dx*dx+dy*dy);
-
-            if(distance<115){
-
-                ctx.beginPath();
-
-                ctx.moveTo(p.x,p.y);
-
-                ctx.lineTo(q.x,q.y);
-
-                ctx.strokeStyle=
-                `rgba(255,255,255,${
-                    .035*(1-distance/115)
-                })`;
-
-                ctx.lineWidth=.5;
-
-                ctx.stroke();
-
-            }
+            closeLightbox();
 
         }
 
-    });
+    }
+);
 
-    requestAnimationFrame(drawParticles);
+
+/* =========================================================
+   ESC CLOSE
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event=>{
+
+        if(
+            event.key === "Escape"
+        ){
+
+            closeLightbox();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   PREMIUM PORT/FOLIO LENS
+   IMPORTANT:
+   Lens moves between the actual PORT and FOLIO
+   text positions only.
+========================================================= */
+
+let lensStart =
+    performance.now();
+
+
+function animateLens(now){
+
+    const elapsed =
+        (now - lensStart) / 1000;
+
+
+    const wrapRect =
+        titleWrap.getBoundingClientRect();
+
+
+    const wordRects =
+        words.map(
+            word =>
+                word.getBoundingClientRect()
+        );
+
+
+    if(
+        wordRects.length < 2 ||
+        wrapRect.height <= 0
+    ){
+
+        requestAnimationFrame(
+            animateLens
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Smooth 0 → 1 → 0 movement.
+
+       This means:
+
+       PORT
+         ↓
+       FOLIO
+         ↓
+       PORT
+
+       The lens center never wanders
+       into the empty page area.
+    */
+
+    const phase =
+        (
+            Math.sin(
+                elapsed * 0.62
+            ) + 1
+        ) / 2;
+
+
+    const portRect =
+        wordRects[0];
+
+    const folioRect =
+        wordRects[1];
+
+
+    const portCenterY =
+        portRect.top +
+        portRect.height / 2;
+
+
+    const folioCenterY =
+        folioRect.top +
+        folioRect.height / 2;
+
+
+    /*
+       Exact vertical position
+       between PORT and FOLIO.
+    */
+
+    const lensCenterY =
+        portCenterY +
+        (
+            folioCenterY -
+            portCenterY
+        ) *
+        phase;
+
+
+    const lensY =
+        (
+            (
+                lensCenterY -
+                wrapRect.top
+            )
+            /
+            wrapRect.height
+        )
+        * 100;
+
+
+    /*
+       Keep lens horizontally
+       over the typography.
+
+       Very subtle side movement only.
+    */
+
+    const lensX =
+        50 +
+        Math.sin(
+            elapsed * 0.42
+        ) * 5;
+
+
+    titleWrap.style.setProperty(
+        "--lens-x",
+        lensX + "%"
+    );
+
+
+    titleWrap.style.setProperty(
+        "--lens-y",
+        lensY + "%"
+    );
+
+
+    requestAnimationFrame(
+        animateLens
+    );
 
 }
 
-drawParticles();
 
-
-/* ==========================================
-   IMAGE PROTECTION DETERRENTS
-========================================== */
-
-document.addEventListener(
-"contextmenu",
-e=>e.preventDefault()
+requestAnimationFrame(
+    animateLens
 );
 
-document.addEventListener(
-"dragstart",
-e=>e.preventDefault()
-);
 
-document.addEventListener(
-"selectstart",
-e=>e.preventDefault()
-);
+/* =========================================================
+   FOLDER 3D TILT
+========================================================= */
 
-document.addEventListener(
-"copy",
-e=>e.preventDefault()
-);
+document
+.querySelectorAll(".folder-card")
+.forEach(card=>{
 
-document.addEventListener(
-"cut",
-e=>e.preventDefault()
-);
+    card.addEventListener(
+        "mousemove",
+        event=>{
 
-document.addEventListener(
-"keydown",
-e=>{
+            const rect =
+                card.getBoundingClientRect();
 
-    const key=
-    e.key.toLowerCase();
 
-    if(
-        e.ctrlKey &&
-        (
-            key==="s" ||
-            key==="u" ||
-            key==="c" ||
-            key==="j" ||
-            key==="i"
-        )
-    ){
-        e.preventDefault();
-    }
+            const x =
+                event.clientX -
+                rect.left;
 
-    if(e.key==="F12"){
-        e.preventDefault();
-    }
+
+            const y =
+                event.clientY -
+                rect.top;
+
+
+            const centerX =
+                rect.width / 2;
+
+
+            const centerY =
+                rect.height / 2;
+
+
+            const rotateY =
+                (
+                    (x - centerX)
+                    /
+                    centerX
+                ) * 5;
+
+
+            const rotateX =
+                -(
+                    (y - centerY)
+                    /
+                    centerY
+                ) * 5;
+
+
+            card.style.transform =
+                `
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                translateY(-4px)
+                scale(1.01)
+                `;
+
+        }
+    );
+
+
+    card.addEventListener(
+        "mouseleave",
+        ()=>{
+
+            card.style.transform =
+                "";
+
+        }
+    );
 
 });
 
 
-/* ==========================================
-   MOBILE LONG PRESS DETERRENT
-========================================== */
+/* =========================================================
+   CURSOR GLOW
+========================================================= */
+
+const cursorGlow =
+    document.getElementById(
+        "cursorGlow"
+    );
+
 
 document.addEventListener(
-"touchstart",
-e=>{
+    "mousemove",
+    event=>{
 
-    if(e.target.tagName==="IMG"){
-        e.preventDefault();
+        cursorGlow.style.left =
+            event.clientX + "px";
+
+        cursorGlow.style.top =
+            event.clientY + "px";
+
     }
+);
 
-},
-{passive:false}
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+const particles =
+    document.getElementById(
+        "particles"
+    );
+
+
+for(
+    let i=0;
+    i<55;
+    i++
+){
+
+    const particle =
+        document.createElement(
+            "div"
+        );
+
+    particle.className =
+        "particle";
+
+
+    particle.style.left =
+        Math.random() * 100 + "%";
+
+
+    particle.style.animationDuration =
+        (8 + Math.random()*12) + "s";
+
+
+    particle.style.animationDelay =
+        (-Math.random()*15) + "s";
+
+
+    particle.style.opacity =
+        .2 +
+        Math.random()*.7;
+
+
+    particle.style.transform =
+        `scale(${.5 + Math.random()*1.5})`;
+
+
+    particles.appendChild(
+        particle
+    );
+
+}
+
+
+/* =========================================================
+   IMAGE PROTECTION
+   NOTE:
+   This is deterrence only. Screenshots and browser
+   developer tools can never be completely blocked.
+========================================================= */
+
+
+/* disable right click */
+
+document.addEventListener(
+    "contextmenu",
+    event=>{
+        event.preventDefault();
+    }
+);
+
+
+/* disable image dragging */
+
+document.addEventListener(
+    "dragstart",
+    event=>{
+
+        if(
+            event.target.tagName ===
+            "IMG"
+        ){
+
+            event.preventDefault();
+
+        }
+
+    }
+);
+
+
+/* disable text selection */
+
+document.addEventListener(
+    "selectstart",
+    event=>{
+
+        event.preventDefault();
+
+    }
+);
+
+
+/* common save / source / devtools shortcuts */
+
+document.addEventListener(
+    "keydown",
+    event=>{
+
+        const key =
+            event.key.toLowerCase();
+
+
+        /*
+           Ctrl+S
+        */
+
+        if(
+            event.ctrlKey &&
+            key === "s"
+        ){
+
+            event.preventDefault();
+            return;
+
+        }
+
+
+        /*
+           Ctrl+U
+        */
+
+        if(
+            event.ctrlKey &&
+            key === "u"
+        ){
+
+            event.preventDefault();
+            return;
+
+        }
+
+
+        /*
+           Ctrl+Shift+I
+           Ctrl+Shift+J
+           Ctrl+Shift+C
+        */
+
+        if(
+            event.ctrlKey &&
+            event.shiftKey &&
+            (
+                key === "i" ||
+                key === "j" ||
+                key === "c"
+            )
+        ){
+
+            event.preventDefault();
+            return;
+
+        }
+
+
+        /*
+           F12
+        */
+
+        if(
+            event.key === "F12"
+        ){
+
+            event.preventDefault();
+            return;
+
+        }
+
+
+        /*
+           Ctrl+P
+        */
+
+        if(
+            event.ctrlKey &&
+            key === "p"
+        ){
+
+            event.preventDefault();
+            return;
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MOBILE LONG PRESS DETERRENCE
+========================================================= */
+
+document.addEventListener(
+    "touchstart",
+    event=>{
+
+        if(
+            event.target.tagName ===
+            "IMG"
+        ){
+
+            event.preventDefault();
+
+        }
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+/* =========================================================
+   PREVENT IMAGE OPEN IN NEW TAB
+========================================================= */
+
+document.addEventListener(
+    "auxclick",
+    event=>{
+
+        if(
+            event.target.tagName ===
+            "IMG"
+        ){
+
+            event.preventDefault();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   HISTORY / BACK BUTTON SUPPORT
+========================================================= */
+
+window.addEventListener(
+    "popstate",
+    ()=>{
+
+        goHome();
+
+    }
+);
+
+
+/* =========================================================
+   FINISH
+========================================================= */
+
+console.log(
+    "Portfolio loaded."
 );
 
 </script>
