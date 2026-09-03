@@ -2,186 +2,141 @@
 
 /* =========================================================
    PORTFOLIO DATA
+   Images are uploaded directly in the repository root
    ========================================================= */
 
 const galleries = {
 
     vtuber: {
-
         title: "VTuber Model",
-
         desc: "PNG VTuber model and character design collection",
 
         images: [
-
-            "VTuber/Png%20model%201.jpeg",
-            "VTuber/Png%20model%202.jpeg",
-            "VTuber/Png%20model%203.jpeg",
-            "VTuber/Png%20model%204.jpeg",
-            "VTuber/Png%20model%205.jpeg",
-            "VTuber/Png%20model%206.jpeg",
-            "VTuber/Png%20model%207.jpeg",
-            "VTuber/Png%20model%208.jpeg",
-            "VTuber/Png%20model%209.jpeg"
-
+            "Png model 1.jpeg",
+            "Png model 2.jpeg",
+            "Png model 3.jpeg",
+            "Png model 4.jpeg",
+            "Png model 5.jpeg",
+            "Png model 6.jpeg",
+            "Png model 7.jpeg",
+            "Png model 8.jpeg",
+            "Png model 9.jpeg"
         ]
-
     },
 
-
     logo: {
-
-        title: "Logo Design",
-
+        title: "Logo",
         desc: "Custom logo and visual identity designs",
 
         images: [
-
-            "Logo/logo%201.jpeg",
-            "Logo/logo%202.jpeg",
-            "Logo/logo%203.jpeg",
-            "Logo/logo%204.jpeg",
-            "Logo/logo%205.jpeg"
-
+            "logo 1.jpeg",
+            "logo 2.jpeg",
+            "logo 3.jpeg",
+            "logo 4.jpeg",
+            "logo 5.jpeg"
         ]
-
     },
 
-
     banner: {
-
-        title: "Banner Design",
-
+        title: "Banner",
         desc: "Professional banners for VTubers, streamers and social media",
 
         images: [
-
-            "Banner/Banner1.jpeg",
-            "Banner/Banner2.jpeg",
-            "Banner/Banner3.jpeg",
-            "Banner/Banner4.jpeg",
-            "Banner/Banner5.jpeg",
-            "Banner/Banner6.jpeg",
-            "Banner/Banner7.jpeg"
-
+            "Banner1.jpeg",
+            "Banner2.jpeg",
+            "Banner3.jpeg",
+            "Banner4.jpeg",
+            "Banner5.jpeg",
+            "Banner6.jpeg",
+            "Banner7.jpeg"
         ]
-
     },
 
-
     emotes: {
-
         title: "Emotes",
-
         desc: "Custom stream and VTuber emote designs",
 
         images: [
-
-            "Emotes/Emotes%201.jpeg",
-            "Emotes/Emotes%202.jpeg",
-            "Emotes/Emotes%203.jpeg",
-            "Emotes/Emotes%204.jpeg"
-
+            "Emotes 1.jpeg",
+            "Emotes 2.jpeg",
+            "Emotes 3.jpeg",
+            "Emotes 4.jpeg"
         ]
-
     }
 
 };
 
 
 /* =========================================================
-   CREATE PREMIUM PORTFOLIO FOLDERS
+   CREATE PORTFOLIO FOLDERS
    ========================================================= */
 
-const folders =
-    document.getElementById("folders");
+const folders = document.getElementById("folders");
 
+if (folders) {
 
-Object.entries(galleries).forEach(
-    ([key, gallery], index) => {
+    folders.innerHTML = "";
 
-        const card =
-            document.createElement("article");
+    Object.entries(galleries).forEach(
+        ([key, gallery], index) => {
 
+            const card = document.createElement("article");
 
-        card.className =
-            "glass folder";
+            card.className = "glass folder";
 
+            const coverImage = gallery.images[0];
 
-        const coverImage =
-            gallery.images[0];
+            card.innerHTML = `
 
-
-        card.innerHTML = `
-
-            <div
-                class="folder-cover"
-                style="
-                    background-image:
-                    url('${coverImage}');
-                "
-            >
-
-                <div class="folder-glow"></div>
-
-            </div>
-
-
-            <div class="folder-content">
-
-                <div class="folder-number">
-
-                    ${String(index + 1).padStart(2, "0")}
-
+                <div
+                    class="folder-cover"
+                    style="
+                        background-image:
+                        url('${coverImage.replace(/'/g, "\\'")}');
+                    "
+                >
+                    <div class="folder-glow"></div>
                 </div>
 
+                <div class="folder-content">
 
-                <h4>
+                    <div class="folder-number">
+                        ${String(index + 1).padStart(2, "0")}
+                    </div>
 
-                    ${gallery.title}
+                    <h4>
+                        ${gallery.title}
+                    </h4>
 
-                </h4>
+                    <p>
+                        ${gallery.desc}
+                    </p>
 
+                    <div class="folder-footer">
 
-                <p>
+                        <span>
+                            ${gallery.images.length}
+                            ${gallery.images.length === 1 ? "Project" : "Projects"}
+                        </span>
 
-                    ${gallery.desc}
+                        <span class="open-folder">
+                            Explore →
+                        </span>
 
-                </p>
-
-
-                <div class="folder-footer">
-
-                    <span>
-
-                        ${gallery.images.length}
-                        Projects
-
-                    </span>
-
-                    <span class="open-folder">
-
-                        Explore →
-
-                    </span>
+                    </div>
 
                 </div>
+            `;
 
-            </div>
+            card.addEventListener(
+                "click",
+                () => openGallery(key)
+            );
 
-        `;
-
-
-        card.addEventListener(
-            "click",
-            () => openGallery(key)
-        );
-
-
-        folders.appendChild(card);
-
-    }
-);
+            folders.appendChild(card);
+        }
+    );
+}
 
 
 /* =========================================================
@@ -190,58 +145,43 @@ Object.entries(galleries).forEach(
 
 function openGallery(key) {
 
-    const gallery =
-        galleries[key];
+    const gallery = galleries[key];
 
+    if (!gallery) return;
 
-    const main =
-        document.getElementById("main");
+    const main = document.getElementById("main");
 
+    if (!main) return;
 
     main.innerHTML = `
 
-        <section
-            class="gallery active"
-        >
+        <section class="gallery active">
 
-            <div
-                class="gallery-head"
-            >
+            <div class="gallery-head">
 
                 <div>
 
                     <button
                         class="back"
                         onclick="goHome()"
+                        type="button"
                     >
-
                         ← Back to Portfolio
-
                     </button>
-
 
                     <div
                         class="kicker"
                         style="margin-top:24px"
                     >
-
-                        Portfolio /
-                        ${gallery.title}
-
+                        Portfolio / ${gallery.title}
                     </div>
 
-
                     <h2>
-
                         ${gallery.title}
-
                     </h2>
 
-
                     <p>
-
                         ${gallery.desc}
-
                     </p>
 
                 </div>
@@ -252,24 +192,22 @@ function openGallery(key) {
             <div class="images">
 
                 ${gallery.images.map(
-                    (image,index) => `
+                    (image, index) => `
 
                         <div
                             class="image-card"
-                            data-image="${image}"
+                            data-image="${image.replace(/"/g, "&quot;")}"
                         >
 
                             <img
-                                src="${image}"
+                                src="${image.replace(/"/g, "&quot;")}"
                                 alt="${gallery.title} ${index + 1}"
                                 loading="lazy"
                                 draggable="false"
                             >
 
                             <div class="image-number">
-
                                 ${String(index + 1).padStart(2, "0")}
-
                             </div>
 
                         </div>
@@ -285,11 +223,8 @@ function openGallery(key) {
 
 
     window.scrollTo({
-
         top: 0,
-
         behavior: "smooth"
-
     });
 
 }
