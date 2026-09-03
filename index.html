@@ -1,918 +1,308 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
 
-<title>Portfolio | Digital Artist</title>
+/* =========================================================
+   PORTFOLIO DATA
+   ========================================================= */
 
-<style>
+const galleries = {
 
-/* =========================
-   RESET
-========================= */
+    vtuber: {
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        title: "VTuber Model",
 
-html {
-    scroll-behavior: smooth;
-}
+        desc: "PNG VTuber model and character design collection",
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #08080c;
-    color: #ffffff;
-    overflow-x: hidden;
-}
+        images: [
 
-/* =========================
-   ANIMATED BACKGROUND
-========================= */
+            "VTuber/Png%20model%201.jpeg",
+            "VTuber/Png%20model%202.jpeg",
+            "VTuber/Png%20model%203.jpeg",
+            "VTuber/Png%20model%204.jpeg",
+            "VTuber/Png%20model%205.jpeg",
+            "VTuber/Png%20model%206.jpeg",
+            "VTuber/Png%20model%207.jpeg",
+            "VTuber/Png%20model%208.jpeg",
+            "VTuber/Png%20model%209.jpeg"
 
-body::before {
-    content: "";
-    position: fixed;
-    width: 500px;
-    height: 500px;
-    background: #a855f7;
-    filter: blur(180px);
-    opacity: 0.12;
-    top: -200px;
-    left: -150px;
-    z-index: -2;
-    animation: floatOne 8s infinite alternate ease-in-out;
-}
+        ]
 
-body::after {
-    content: "";
-    position: fixed;
-    width: 500px;
-    height: 500px;
-    background: #ec4899;
-    filter: blur(180px);
-    opacity: 0.10;
-    right: -200px;
-    bottom: -200px;
-    z-index: -2;
-    animation: floatTwo 10s infinite alternate ease-in-out;
-}
+    },
 
-@keyframes floatOne {
-    from {
-        transform: translate(0,0);
+
+    logo: {
+
+        title: "Logo Design",
+
+        desc: "Custom logo and visual identity designs",
+
+        images: [
+
+            "Logo/logo%201.jpeg",
+            "Logo/logo%202.jpeg",
+            "Logo/logo%203.jpeg",
+            "Logo/logo%204.jpeg",
+            "Logo/logo%205.jpeg"
+
+        ]
+
+    },
+
+
+    banner: {
+
+        title: "Banner Design",
+
+        desc: "Professional banners for VTubers, streamers and social media",
+
+        images: [
+
+            "Banner/Banner1.jpeg",
+            "Banner/Banner2.jpeg",
+            "Banner/Banner3.jpeg",
+            "Banner/Banner4.jpeg",
+            "Banner/Banner5.jpeg",
+            "Banner/Banner6.jpeg",
+            "Banner/Banner7.jpeg"
+
+        ]
+
+    },
+
+
+    emotes: {
+
+        title: "Emotes",
+
+        desc: "Custom stream and VTuber emote designs",
+
+        images: [
+
+            "Emotes/Emotes%201.jpeg",
+            "Emotes/Emotes%202.jpeg",
+            "Emotes/Emotes%203.jpeg",
+            "Emotes/Emotes%204.jpeg"
+
+        ]
+
     }
 
-    to {
-        transform: translate(100px,100px);
-    }
-}
+};
 
-@keyframes floatTwo {
-    from {
-        transform: translate(0,0);
-    }
 
-    to {
-        transform: translate(-100px,-100px);
-    }
-}
+/* =========================================================
+   CREATE PREMIUM PORTFOLIO FOLDERS
+   ========================================================= */
 
-/* =========================
-   NAVBAR
-========================= */
+const folders =
+    document.getElementById("folders");
 
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
 
-    padding: 18px 7%;
+Object.entries(galleries).forEach(
+    ([key, gallery], index) => {
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+        const card =
+            document.createElement("article");
 
-    background: rgba(8,8,12,0.72);
-    backdrop-filter: blur(18px);
 
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+        card.className =
+            "glass folder";
 
-    z-index: 1000;
-}
 
-.logo-name {
-    font-size: 22px;
-    font-weight: bold;
+        const coverImage =
+            gallery.images[0];
 
-    background: linear-gradient(
-        90deg,
-        #ffffff,
-        #d946ef,
-        #a855f7
-    );
 
-    -webkit-background-clip: text;
-    color: transparent;
-}
+        card.innerHTML = `
 
-.nav-links {
-    display: flex;
-    gap: 28px;
-}
+            <div
+                class="folder-cover"
+                style="
+                    background-image:
+                    url('${coverImage}');
+                "
+            >
 
-.nav-links a {
-    color: #ccc;
-    text-decoration: none;
-    font-size: 14px;
+                <div class="folder-glow"></div>
 
-    transition: 0.3s;
-}
+            </div>
 
-.nav-links a:hover {
-    color: #ffffff;
-    text-shadow: 0 0 15px #d946ef;
-}
 
-/* =========================
-   HERO
-========================= */
+            <div class="folder-content">
 
-.hero {
-    min-height: 100vh;
+                <div class="folder-number">
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+                    ${String(index + 1).padStart(2, "0")}
 
-    text-align: center;
+                </div>
 
-    padding: 120px 20px 70px;
 
-    position: relative;
-}
+                <h4>
 
-.hero-badge {
-    padding: 8px 18px;
+                    ${gallery.title}
 
-    border: 1px solid rgba(217,70,239,0.4);
-    border-radius: 50px;
+                </h4>
 
-    background: rgba(217,70,239,0.08);
 
-    color: #e879f9;
+                <p>
 
-    font-size: 13px;
+                    ${gallery.desc}
 
-    margin-bottom: 25px;
+                </p>
 
-    animation: fadeUp 1s ease;
-}
 
-.hero h1 {
-    font-size: clamp(50px, 9vw, 105px);
-    line-height: 0.95;
+                <div class="folder-footer">
 
-    font-weight: 800;
+                    <span>
 
-    background: linear-gradient(
-        120deg,
-        #ffffff,
-        #e879f9,
-        #a855f7,
-        #ffffff
-    );
+                        ${gallery.images.length}
+                        Projects
 
-    background-size: 300%;
+                    </span>
 
-    -webkit-background-clip: text;
-    color: transparent;
+                    <span class="open-folder">
 
-    animation:
-        gradientMove 6s infinite linear,
-        fadeUp 1s ease;
-}
+                        Explore →
 
-@keyframes gradientMove {
-    0% {
-        background-position: 0%;
-    }
+                    </span>
 
-    100% {
-        background-position: 300%;
-    }
-}
+                </div>
 
-.hero p {
-    max-width: 650px;
+            </div>
 
-    margin-top: 30px;
+        `;
 
-    color: #aaa;
 
-    font-size: 18px;
-    line-height: 1.8;
-
-    animation: fadeUp 1.2s ease;
-}
-
-.hero-button {
-    margin-top: 35px;
-
-    padding: 15px 32px;
-
-    border-radius: 50px;
-
-    text-decoration: none;
-
-    color: white;
-
-    background: linear-gradient(
-        135deg,
-        #d946ef,
-        #8b5cf6
-    );
-
-    box-shadow: 0 0 30px rgba(217,70,239,0.25);
-
-    transition: 0.35s;
-
-    animation: fadeUp 1.4s ease;
-}
-
-.hero-button:hover {
-    transform: translateY(-5px) scale(1.04);
-
-    box-shadow:
-        0 0 25px rgba(217,70,239,0.5),
-        0 0 60px rgba(139,92,246,0.25);
-}
-
-/* =========================
-   SECTIONS
-========================= */
-
-section {
-    scroll-margin-top: 100px;
-}
-
-.portfolio-section {
-    max-width: 1400px;
-
-    margin: auto;
-
-    padding: 110px 6%;
-}
-
-.section-title {
-    text-align: center;
-
-    margin-bottom: 55px;
-}
-
-.section-title span {
-    color: #d946ef;
-
-    font-size: 13px;
-
-    letter-spacing: 4px;
-
-    text-transform: uppercase;
-}
-
-.section-title h2 {
-    font-size: clamp(35px,5vw,55px);
-
-    margin-top: 12px;
-
-    background: linear-gradient(
-        90deg,
-        white,
-        #d946ef
-    );
-
-    -webkit-background-clip: text;
-    color: transparent;
-}
-
-.section-title p {
-    margin-top: 15px;
-
-    color: #888;
-}
-
-/* =========================
-   GALLERY
-========================= */
-
-.gallery {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(250px,1fr));
-
-    gap: 25px;
-}
-
-/* =========================
-   CARD
-========================= */
-
-.card {
-    position: relative;
-
-    border-radius: 20px;
-
-    overflow: hidden;
-
-    background: rgba(255,255,255,0.035);
-
-    border: 1px solid rgba(255,255,255,0.08);
-
-    transition:
-        transform 0.45s ease,
-        border 0.45s ease,
-        box-shadow 0.45s ease;
-
-    animation: cardAppear 0.8s ease;
-}
-
-.card::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background: linear-gradient(
-        135deg,
-        rgba(217,70,239,0.15),
-        transparent 50%,
-        rgba(139,92,246,0.12)
-    );
-
-    opacity: 0;
-
-    transition: 0.4s;
-
-    z-index: 1;
-
-    pointer-events: none;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-
-    border-color: rgba(217,70,239,0.5);
-
-    box-shadow:
-        0 20px 50px rgba(0,0,0,0.45),
-        0 0 30px rgba(217,70,239,0.12);
-}
-
-.card:hover::before {
-    opacity: 1;
-}
-
-.card img {
-    width: 100%;
-
-    display: block;
-
-    transition:
-        transform 0.6s ease,
-        filter 0.6s ease;
-}
-
-.card:hover img {
-    transform: scale(1.06);
-
-    filter: brightness(1.08);
-}
-
-@keyframes cardAppear {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* =========================
-   ABOUT
-========================= */
-
-.about-box {
-    max-width: 850px;
-
-    margin: auto;
-
-    padding: 45px;
-
-    border-radius: 25px;
-
-    background: rgba(255,255,255,0.035);
-
-    border: 1px solid rgba(255,255,255,0.08);
-
-    text-align: center;
-
-    line-height: 1.9;
-
-    color: #aaa;
-
-    box-shadow:
-        0 20px 70px rgba(0,0,0,0.25);
-}
-
-.about-box strong {
-    color: white;
-}
-
-/* =========================
-   CONTACT
-========================= */
-
-.contact {
-    text-align: center;
-
-    padding: 120px 20px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(217,70,239,0.10),
-            transparent 60%
+        card.addEventListener(
+            "click",
+            () => openGallery(key)
         );
+
+
+        folders.appendChild(card);
+
+    }
+);
+
+
+/* =========================================================
+   OPEN GALLERY
+   ========================================================= */
+
+function openGallery(key) {
+
+    const gallery =
+        galleries[key];
+
+
+    const main =
+        document.getElementById("main");
+
+
+    main.innerHTML = `
+
+        <section
+            class="gallery active"
+        >
+
+            <div
+                class="gallery-head"
+            >
+
+                <div>
+
+                    <button
+                        class="back"
+                        onclick="goHome()"
+                    >
+
+                        ← Back to Portfolio
+
+                    </button>
+
+
+                    <div
+                        class="kicker"
+                        style="margin-top:24px"
+                    >
+
+                        Portfolio /
+                        ${gallery.title}
+
+                    </div>
+
+
+                    <h2>
+
+                        ${gallery.title}
+
+                    </h2>
+
+
+                    <p>
+
+                        ${gallery.desc}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="images">
+
+                ${gallery.images.map(
+                    (image,index) => `
+
+                        <div
+                            class="image-card"
+                            data-image="${image}"
+                        >
+
+                            <img
+                                src="${image}"
+                                alt="${gallery.title} ${index + 1}"
+                                loading="lazy"
+                                draggable="false"
+                            >
+
+                            <div class="image-number">
+
+                                ${String(index + 1).padStart(2, "0")}
+
+                            </div>
+
+                        </div>
+
+                    `
+                ).join("")}
+
+            </div>
+
+        </section>
+
+    `;
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
 }
 
-.contact h2 {
-    font-size: clamp(40px,6vw,70px);
 
-    background: linear-gradient(
-        90deg,
-        white,
-        #d946ef
-    );
+/* =========================================================
+   GO HOME
+   ========================================================= */
 
-    -webkit-background-clip: text;
-    color: transparent;
+function goHome() {
+
+    window.location.reload();
+
 }
 
-.contact p {
-    margin: 20px auto 35px;
-
-    max-width: 600px;
-
-    color: #999;
-
-    line-height: 1.7;
-}
-
-.contact-button {
-    display: inline-block;
-
-    padding: 16px 35px;
-
-    border-radius: 50px;
-
-    color: white;
-
-    text-decoration: none;
-
-    background: linear-gradient(
-        135deg,
-        #d946ef,
-        #8b5cf6
-    );
-
-    transition: 0.3s;
-
-    box-shadow: 0 0 30px rgba(217,70,239,0.2);
-}
-
-.contact-button:hover {
-    transform: translateY(-5px);
-
-    box-shadow:
-        0 0 35px rgba(217,70,239,0.45);
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    padding: 30px;
-
-    text-align: center;
-
-    border-top: 1px solid rgba(255,255,255,0.07);
-
-    color: #666;
-
-    font-size: 13px;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:700px) {
-
-    .navbar {
-        padding: 15px 5%;
-    }
-
-    .nav-links {
-        gap: 12px;
-    }
-
-    .nav-links a {
-        font-size: 11px;
-    }
-
-    .logo-name {
-        display: none;
-    }
-
-    .hero {
-        padding-top: 130px;
-    }
-
-    .hero p {
-        font-size: 15px;
-    }
-
-    .portfolio-section {
-        padding: 80px 5%;
-    }
-
-    .gallery {
-        grid-template-columns: 1fr;
-    }
-
-    .about-box {
-        padding: 30px 20px;
-    }
-}
-
-</style>
-</head>
-
-
-<body>
-
-
-<!-- =========================
-     NAVIGATION
-========================= -->
-
-<nav class="navbar">
-
-    <div class="logo-name">
-        Portfolio
-    </div>
-
-    <div class="nav-links">
-
-        <a href="#home">Home</a>
-
-        <a href="#logos">Logos</a>
-
-        <a href="#banners">Banners</a>
-
-        <a href="#models">VTuber Models</a>
-
-        <a href="#emotes">Emotes</a>
-
-        <a href="#about">About</a>
-
-        <a href="#contact">Contact</a>
-
-    </div>
-
-</nav>
-
-
-<!-- =========================
-     HERO
-========================= -->
-
-<section class="hero" id="home">
-
-    <div class="hero-badge">
-        DIGITAL ARTIST • DESIGNER
-    </div>
-
-    <h1>
-        Creative<br>
-        Portfolio
-    </h1>
-
-    <p>
-        Welcome to my portfolio. I create custom artwork,
-        branding and visuals for VTubers, streamers and
-        content creators.
-    </p>
-
-    <a href="#logos" class="hero-button">
-        Explore My Work
-    </a>
-
-</section>
-
-
-<!-- =========================
-     LOGOS
-========================= -->
-
-<section class="portfolio-section" id="logos">
-
-    <div class="section-title">
-
-        <span>01 — Branding</span>
-
-        <h2>Logos</h2>
-
-        <p>
-            Custom logos designed to give every creator
-            a unique identity.
-        </p>
-
-    </div>
-
-
-    <div class="gallery">
-
-        <div class="card">
-            <img src="logo/logo%201.jpeg" alt="Logo 1">
-        </div>
-
-        <div class="card">
-            <img src="logo/logo%202.jpeg" alt="Logo 2">
-        </div>
-
-        <div class="card">
-            <img src="logo/logo%203.jpeg" alt="Logo 3">
-        </div>
-
-        <div class="card">
-            <img src="logo/logo%204.jpeg" alt="Logo 4">
-        </div>
-
-        <div class="card">
-            <img src="logo/logo%205.jpeg" alt="Logo 5">
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     BANNERS
-========================= -->
-
-<section class="portfolio-section" id="banners">
-
-    <div class="section-title">
-
-        <span>02 — Channel Design</span>
-
-        <h2>Banners</h2>
-
-        <p>
-            Eye-catching banners made for channels,
-            profiles and streaming platforms.
-        </p>
-
-    </div>
-
-
-    <div class="gallery">
-
-        <div class="card">
-            <img src="banner/Banner1.jpeg" alt="Banner 1">
-        </div>
-
-        <div class="card">
-            <img src="banner/Banner2.jpeg" alt="Banner 2">
-        </div>
-
-        <div class="card">
-            <img src="banner/Banner3.jpeg" alt="Banner 3">
-        </div>
-
-        <div class="card">
-            <img src="banner/Banner4.jpeg" alt="Banner 4">
-        </div>
-
-        <div class="card">
-            <img src="banner/Banner5.jpeg" alt="Banner 5">
-        </div>
-
-        <div class="card">
-            <img src="banner/Banner6.jpeg" alt="Banner 6">
-        </div>
-
-        <div class="card">
-            <img src="banner/Banner7.jpeg" alt="Banner 7">
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     VTUBER MODELS
-========================= -->
-
-<section class="portfolio-section" id="models">
-
-    <div class="section-title">
-
-        <span>03 — Character Art</span>
-
-        <h2>VTuber Models</h2>
-
-        <p>
-            Character artwork and PNG models created
-            for virtual creators.
-        </p>
-
-    </div>
-
-
-    <div class="gallery">
-
-        <div class="card">
-            <img src="vtuber-model/Png%20model%201.jpeg" alt="PNG Model 1">
-        </div>
-
-        <div class="card">
-            <img src="vtuber-model/Png%20model%202.jpeg" alt="PNG Model 2">
-        </div>
-
-        <div class="card">
-            <img src="vtuber-model/Png%20model%203.jpeg" alt="PNG Model 3">
-        </div>
-
-        <div class="card">
-            <img src="vtuber-model/Png%20model%204.jpeg" alt="PNG Model 4">
-        </div>
-
-        <div class="card">
-            <img src="vtuber-model/Png%20model%205.jpeg" alt="PNG Model 5">
-        </div>
-
-        <div class="card">
-            <img src="vtuber-model/Png%20model%206.jpeg" alt="PNG Model 6">
-        </div>
-
-        <div class="card">
-            <img src="vtuber-model/Png%20model%207.jpeg" alt="PNG Model 7">
-        </div>
-
-        <div class="card">
-            <img src="vtuber-model/Png%20model%208.jpeg" alt="PNG Model 8">
-        </div>
-
-        <div class="card">
-            <img src="vtuber-model/Png%20model%209.jpeg" alt="PNG Model 9">
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     EMOTES
-========================= -->
-
-<section class="portfolio-section" id="emotes">
-
-    <div class="section-title">
-
-        <span>04 — Stream Assets</span>
-
-        <h2>Emotes</h2>
-
-        <p>
-            Custom expressive emotes for streams,
-            communities and chat.
-        </p>
-
-    </div>
-
-
-    <div class="gallery">
-
-        <div class="card">
-            <img src="emotes/Emotes%201.jpeg" alt="Emotes 1">
-        </div>
-
-        <div class="card">
-            <img src="emotes/Emotes%202.jpeg" alt="Emotes 2">
-        </div>
-
-        <div class="card">
-            <img src="emotes/Emotes%203.jpeg" alt="Emotes 3">
-        </div>
-
-        <div class="card">
-            <img src="emotes/Emotes%204.jpeg" alt="Emotes 4">
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     ABOUT
-========================= -->
-
-<section class="portfolio-section" id="about">
-
-    <div class="section-title">
-
-        <span>About Me</span>
-
-        <h2>Who I Am</h2>
-
-    </div>
-
-
-    <div class="about-box">
-
-        <p>
-            I'm a <strong>digital artist and graphic designer</strong>
-            focused on creating unique visuals for
-            VTubers, streamers and content creators.
-        </p>
-
-        <br>
-
-        <p>
-            From branding and logos to banners,
-            PNG models and emotes, I aim to create
-            artwork that matches each creator's
-            personality and vision.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     CONTACT
-========================= -->
-
-<section class="contact" id="contact">
-
-    <h2>
-        Let's Create Something
-        Amazing.
-    </h2>
-
-    <p>
-        Have a project in mind? Feel free to get in touch
-        and let's bring your ideas to life.
-    </p>
-
-    <a
-        href="mailto:your@email.com"
-        class="contact-button"
-    >
-        Contact Me
-    </a>
-
-</section>
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-    © 2026 My Portfolio — All Rights Reserved.
-
-</footer>
-
-
-</body>
-</html>
+</script>
